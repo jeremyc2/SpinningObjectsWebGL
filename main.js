@@ -23,14 +23,14 @@ function initializeWebGL(){
     }
 }
 
-function logFramesPerSecond(err){
+function calculateFramesPerSecond(err, callback){
     if(err){
-        console.log(err);
+        callback(err);
     }
     else{
         var startFrames = frames;
         setTimeout(function(){ 
-            console.log(frames - startFrames + " Frames per second"); 
+            callback(err, frames - startFrames); 
         }, 1000);
     }
 }
@@ -41,7 +41,9 @@ function main(){
 
     frames = 0;
 
-    logFramesPerSecond();
+    calculateFramesPerSecond(null, function(err, framesPerSecond){
+        console.log(framesPerSecond + " Frames Per Second");
+    });
 
     var loop = function () {
 
