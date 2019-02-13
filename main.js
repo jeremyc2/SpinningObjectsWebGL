@@ -17,9 +17,6 @@ function initializeWebGL(){
         gl.viewportWidth = canvas.width;
         gl.viewportHeight = canvas.height;
 
-        gl.clearColor(0.0,0.0,0.0,1.0);
-        gl.clear(gl.COLOR_BUFFER_BIT);
-
     }else{
         console.log("WebGL not supported!");
     }
@@ -28,5 +25,8 @@ function initializeWebGL(){
 function main(){
 
     initializeWebGL();
+
+    gl.clearColor(0.0,0.0,0.0,1.0);
+    gl.clear(gl.COLOR_BUFFER_BIT);
 
 }
