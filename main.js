@@ -1,10 +1,12 @@
+var gl;
+
 function initializeWebGL(){
     var canvas = document.getElementById("gl");
 
-    var gl = canvas.getContext("webgl") ||
-            canvas.getContext("experimental-webgl") ||
-            canvas.getContext("moz-webgl") ||
-            canvas.getContext("webket-3d");
+    gl = canvas.getContext("webgl") ||
+         canvas.getContext("experimental-webgl") ||
+         canvas.getContext("moz-webgl") ||
+         canvas.getContext("webket-3d");
 
     if (gl){
         var extensions = gl.getSupportedExtensions();
@@ -21,4 +23,10 @@ function initializeWebGL(){
     }else{
         console.log("WebGL not supported!");
     }
+}
+
+function main(){
+
+    initializeWebGL();
+
 }
