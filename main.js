@@ -23,6 +23,10 @@ function initializeWebGL(){
     }
 }
 
+function loadResources(err, callback, resourceFiles){
+    
+}
+
 function calculateFramesPerSecond(err, callback){
     if(err){
         callback(err);
