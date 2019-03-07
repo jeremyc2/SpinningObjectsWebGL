@@ -1,9 +1,10 @@
 <!doctype html>
 <html>
-   <body>
+<script src="drawTrianglePrototype.js"></script>
+   <body onload="main()">
       <canvas width = "570" height = "570" id = "my_Canvas"></canvas>
 
-      <script>
+      <!-- <script>
          /*============== Creating a canvas ====================*/
          var canvas = document.getElementById('my_Canvas');
          gl = canvas.getContext('experimental-webgl');
@@ -125,6 +126,7 @@
 
          // Draw the triangle
          gl.drawElements(gl.TRIANGLES, indices.length, gl.UNSIGNED_SHORT,0);
-      </script>
-    </body>
+      </script> -->
+
+   </body>
 </html>
