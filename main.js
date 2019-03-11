@@ -177,12 +177,12 @@ function testDrawTriangle(){
     /*
       var vertices = [v1.x, v1.y, v1.z, v2.x, v2.y, v2.z, v3.x, v3.y, v3.z]
     */
-    var vertices = [-0.5, 0.5, 0.5, 0.0, -0.5, 0.5, 0.5, 0.5, 0.5]
-    var attributes = ['(1.0, 0.0, 0.0, 1.0)']
-    drawTriangle(vertices, attributes)
-    var vertices = [-0.5, -0.5, 0.0, 0.0, 0.5, 0.0, 0.5, -0.5, 0.0]
-    attributes = ['(0.0, 0.0, 1.0, 1.0)']
-    drawTriangle(vertices, attributes)
+   var vertices = [-0.5, 0.5, 0.0, -0.5, -0.5, 0.5, 0.5, 0.5, 1.0]
+   var attributes = ['(1.0, 0.0, 0.0, 1.0)']
+   drawTriangle(vertices, attributes)
+   var vertices = [-0.5, -0.5, 0.0, 0.5, 0.5, 0.5, 0.5, -0.5, 1.0]
+   attributes = ['(0.0, 0.0, 1.0, 1.0)']
+   drawTriangle(vertices, attributes)
 };
 
 function main(){
