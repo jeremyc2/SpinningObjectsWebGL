@@ -1,15 +1,24 @@
+// TODO for 3D Cube
+// - create color buffer for each face of cube
+// make indices intuitive and adaptable to any size
+// Transformation class >for projection types
+// add html controls
+
+// TODO
+// Make list of To-Do's
+// separate into seperate .js files to be more modular
 var canvas
 var gl
 function main () {
-  var color = [0.0, 1.0, 0.0, 1.0]
-  setupCanvas(color)
+  var canvasColor = [0.0, 1.0, 0.0, 1.0]
+  setupCanvas(canvasColor)
   /*
     var vertices = [v1.x, v1.y, v1.z, v2.x, v2.y, v2.z, v3.x, v3.y, v3.z]
   */
-  var vertices = [-0.5, 0.5, 0.5, 0.0, -0.5, 0.5, 0.5, 0.5, 0.5]
+  var vertices = [-0.5, 0.5, 0.0, -0.5, -0.5, 0.5, 0.5, 0.5, 1.0]
   var attributes = ['(1.0, 0.0, 0.0, 1.0)']
   drawTriangle(vertices, attributes)
-  var vertices = [-0.5, -0.5, 0.0, 0.0, 0.5, 0.0, 0.5, -0.5, 0.0]
+  var vertices = [-0.5, -0.5, 0.0, 0.5, 0.5, 0.5, 0.5, -0.5, 1.0]
   attributes = ['(0.0, 0.0, 1.0, 1.0)']
   drawTriangle(vertices, attributes)
 }

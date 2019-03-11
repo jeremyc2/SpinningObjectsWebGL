@@ -1,5 +1,5 @@
-var gl;
-var frames;
+var gl
+var frames
 
 function initializeWebGL(){
 
@@ -7,16 +7,17 @@ function initializeWebGL(){
 
     var canvas = document.getElementById("gl");
 
-    gl = canvas.getContext("webgl") ||
-         canvas.getContext("experimental-webgl") ||
-         canvas.getContext("moz-webgl") ||
-         canvas.getContext("webket-3d");
+  gl =
+    canvas.getContext('webgl') ||
+    canvas.getContext('experimental-webgl') ||
+    canvas.getContext('moz-webgl') ||
+    canvas.getContext('webket-3d')
 
-    if (gl){
-        var extensions = gl.getSupportedExtensions();
+  if (gl) {
+    var extensions = gl.getSupportedExtensions()
 
-        console.log(gl);
-        console.log(extensions);
+    console.log(gl)
+    console.log(extensions)
 
         // Set the view port
         gl.viewport(0, 0, canvas.width, canvas.height)
@@ -159,16 +160,17 @@ function loadResources(err, callback, resourceFiles){
     
 }
 
-function calculateFramesPerSecond(err, callback){
-    if(err){
-        callback(err);
-    }
-    else{
-        var startFrames = frames;
-        setTimeout(function(){ 
-            callback(err, frames - startFrames); 
-        }, 1000);
-    }
+function loadResources (err, callback, resourceFiles) {}
+
+function calculateFramesPerSecond (err, callback) {
+  if (err) {
+    callback(err)
+  } else {
+    var startFrames = frames
+    setTimeout(function () {
+      callback(err, frames - startFrames)
+    }, 1000)
+  }
 }
 
 function testDrawTriangle(){
@@ -189,9 +191,9 @@ function main(){
 
     initializeWebGL();
 
-    calculateFramesPerSecond(null, function(err, framesPerSecond){
-        console.log(framesPerSecond + " Frames Per Second");
-    });
+  calculateFramesPerSecond(null, function (err, framesPerSecond) {
+    console.log(framesPerSecond + ' Frames Per Second')
+  })
 
     var loop = function () {
 
@@ -201,12 +203,10 @@ function main(){
 
         testDrawTriangle();
 
-        requestAnimationFrame(loop);
+    requestAnimationFrame(loop)
 
-        frames++;
+    frames++
+  }
 
-    }
-
-    requestAnimationFrame(loop);
-
+  requestAnimationFrame(loop)
 }
