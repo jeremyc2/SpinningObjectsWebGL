@@ -252,8 +252,6 @@ function main () {
   shaderResourceList = ['shaders/defaultVertexShader.glsl']
 
   initializeWebGL()
-
-  initializeWebGL()
   processUserInputs()
   calculateFramesPerSecond(null, function (err, framesPerSecond) {
     console.log(framesPerSecond + ' Frames Per Second')
