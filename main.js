@@ -1,6 +1,5 @@
 var gl
 var frames
-var resources = {}
 var keyboardControls = { up: 0, down: 0, left: 0, right: 0 }
 var velocity = 0.01 // 0.00003
 
@@ -49,7 +48,6 @@ function processUserInputs () {
   //     }
   //   })
   window.addEventListener('keydown', event => {
-    console.log(event.key)
     switch (event.key) {
       case 'a': // left (a)
         keyboardControls.left = keyboardControls.left + velocity
@@ -70,11 +68,12 @@ function processUserInputs () {
   })
 }
 
-function drawTriangle (vertices, vertexShader, attributes) {
+function drawTriangle (vertices, attributes) {
   var indices = [0, 1, 2]
   var buffers = bindBuffers(vertices, indices)
+  var vertexShader = VertexShader('vertex')
   var fragShader = FragShader('frag', attributes)
-  var shaders = [VertexShader(vertexShader), fragShader]
+  var shaders = [vertexShader, fragShader]
   attachShaders(shaders, buffers)
   // Draw the triangle
   gl.drawElements(gl.TRIANGLES, indices.length, gl.UNSIGNED_SHORT, 0)
@@ -112,15 +111,24 @@ function bindBuffers (vertices, indices) {
 
   return buffers
 }
-function VertexShader (vertCode) {
-  // Create a vertex shader object
-  var vertShader = gl.createShader(gl.VERTEX_SHADER)
+function VertexShader (type) {
+  if (type == 'vertex') {
+    // Vertex shader source code
+    var vertCode =
+      'attribute vec3 coordinates;' +
+      'void main(void) {' +
+      ' gl_Position = vec4(coordinates, 1.0);' +
+      '}'
 
-  // Attach vertex shader source code
-  gl.shaderSource(vertShader, vertCode)
+    // Create a vertex shader object
+    var vertShader = gl.createShader(gl.VERTEX_SHADER)
 
-  // Compile the vertex shader
-  gl.compileShader(vertShader)
+    // Attach vertex shader source code
+    gl.shaderSource(vertShader, vertCode)
+
+    // Compile the vertex shader
+    gl.compileShader(vertShader)
+  }
   return vertShader
 }
 function FragShader (type, attributes) {
@@ -182,6 +190,10 @@ function clearCanvas (backgroundColor) {
   gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT)
 }
 
+function loadResources (err, callback, resourceFiles) {}
+
+function loadResources (err, callback, resourceFiles) {}
+
 function calculateFramesPerSecond (err, callback) {
   if (err) {
     callback(err)
@@ -192,24 +204,6 @@ function calculateFramesPerSecond (err, callback) {
     }, 1000)
   }
 }
-
-function loadShaderResources (shaderResources) {
-  for (i = 0, len = shaderResources.length; i < len; i++) {
-    loadTextResource(shaderResources[i], function (err, text) {
-      if (err) {
-        console.log(err)
-      } else {
-        var finalLength = resources.shaders.length
-        resources.shaders.length = finalLength + 1
-        var path = shaderResources[i - 1]
-        resources.shaders[
-          path.substring(path.lastIndexOf('/') + 1, path.lastIndexOf('.'))
-        ] = text
-      }
-    })
-  }
-}
-
 function translate (vertices, x, y, z) {
   var i = 0
   while (i < vertices.length - 1) {
@@ -220,7 +214,6 @@ function translate (vertices, x, y, z) {
     i++
     i++
   }
-  // console.log((vertices.length - 1)/3)
 }
 function testDrawTriangle () {
   /*
@@ -234,7 +227,7 @@ function testDrawTriangle () {
     0
   )
   var attributes = ['(1.0, 0.0, 0.0, 1.0)']
-  drawTriangle(vertices, resources.shaders.defaultVertexShader, attributes)
+  drawTriangle(vertices, attributes)
   var vertices = [-0.5, -0.5, 0.0, 0.5, 0.5, 0.5, 0.5, -0.5, 1.0]
   translate(
     vertices,
@@ -243,15 +236,11 @@ function testDrawTriangle () {
     0
   )
   attributes = ['(0.0, 0.0, 1.0, 1.0)']
-  drawTriangle(vertices, resources.shaders.defaultVertexShader, attributes)
+  drawTriangle(vertices, attributes)
 }
 
 function main () {
   var backgroundColor = [0.0, 0.0, 0.0, 1.0]
-
-  shaderResourceList = ['shaders/defaultVertexShader.glsl']
-
-  initializeWebGL()
 
   initializeWebGL()
   processUserInputs()
@@ -259,21 +248,14 @@ function main () {
     console.log(framesPerSecond + ' Frames Per Second')
   })
 
-  resources['shaders'] = { length: 0 }
-  loadShaderResources(shaderResourceList)
-
   var loop = function () {
-    if (resources.shaders.length == shaderResourceList.length) {
-      processUserInputs()
+    clearCanvas(backgroundColor)
 
-      clearCanvas(backgroundColor)
-
-      testDrawTriangle()
-
-      frames++
-    }
+    testDrawTriangle()
 
     requestAnimationFrame(loop)
+
+    frames++
   }
 
   requestAnimationFrame(loop)
