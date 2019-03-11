@@ -242,6 +242,11 @@ function testDrawTriangle () {
 function main () {
   var backgroundColor = [0.0, 0.0, 0.0, 1.0]
 
+<<<<<<< HEAD
+=======
+  shaderResourceList = ['shaders/defaultVertexShader.glsl']
+
+>>>>>>> 2866d93aee873991bec1b3bbb142c6260d9851ce
   initializeWebGL()
   processUserInputs()
   calculateFramesPerSecond(null, function (err, framesPerSecond) {
