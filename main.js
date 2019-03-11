@@ -1,6 +1,8 @@
 var gl
 var frames
 var resources = {}
+var keyboardControls = { up: 0, down: 0, left: 0, right: 0 }
+var velocity = 0.01 // 0.00003
 
 function initializeWebGL () {
   frames = 0
@@ -30,7 +32,42 @@ function initializeWebGL () {
 }
 
 function processUserInputs () {
-  // Fill me out
+  //   $(document).keydown(function (e) {
+  //     switch (e.keyCode) {
+  //       case 65: // left (a)
+  //         keyboardControls.left = keyboardControls.left + velocity
+  //         break
+  //       case 68: // right (d)
+  //         keyboardControls.right = keyboardControls.right + velocity
+  //         break
+  //       case 83: // down (s)
+  //         keyboardControls.down = keyboardControls.down + velocity
+  //         break
+  //       case 87: // up (w)
+  //         keyboardControls.up = keyboardControls.up + velocity
+  //         break
+  //     }
+  //   })
+  window.addEventListener('keydown', event => {
+    console.log(event.key)
+    switch (event.key) {
+      case 'a': // left (a)
+        keyboardControls.left = keyboardControls.left + velocity
+        break
+
+      case 'd': // right (d)
+        keyboardControls.right = keyboardControls.right + velocity
+        break
+
+      case 's': // down (s)
+        keyboardControls.down = keyboardControls.down + velocity
+        break
+
+      case 'w': // up (w)
+        keyboardControls.up = keyboardControls.up + velocity
+        break
+    }
+  })
 }
 
 function drawTriangle (vertices, vertexShader, attributes) {
@@ -173,14 +210,38 @@ function loadShaderResources (shaderResources) {
   }
 }
 
+function translate (vertices, x, y, z) {
+  var i = 0
+  while (i < vertices.length - 1) {
+    vertices[i] += x
+    vertices[i + 1] += y
+    vertices[i + 2] += z
+    i++
+    i++
+    i++
+  }
+  // console.log((vertices.length - 1)/3)
+}
 function testDrawTriangle () {
   /*
       var vertices = [v1.x, v1.y, v1.z, v2.x, v2.y, v2.z, v3.x, v3.y, v3.z]
     */
   var vertices = [-0.5, 0.5, 0.0, -0.5, -0.5, 0.5, 0.5, 0.5, 1.0]
+  translate(
+    vertices,
+    keyboardControls.right - keyboardControls.left,
+    keyboardControls.up - keyboardControls.down,
+    0
+  )
   var attributes = ['(1.0, 0.0, 0.0, 1.0)']
   drawTriangle(vertices, resources.shaders.defaultVertexShader, attributes)
   var vertices = [-0.5, -0.5, 0.0, 0.5, 0.5, 0.5, 0.5, -0.5, 1.0]
+  translate(
+    vertices,
+    keyboardControls.right - keyboardControls.left,
+    keyboardControls.up - keyboardControls.down,
+    0
+  )
   attributes = ['(0.0, 0.0, 1.0, 1.0)']
   drawTriangle(vertices, resources.shaders.defaultVertexShader, attributes)
 }
@@ -192,6 +253,8 @@ function main () {
 
   initializeWebGL()
 
+  initializeWebGL()
+  processUserInputs()
   calculateFramesPerSecond(null, function (err, framesPerSecond) {
     console.log(framesPerSecond + ' Frames Per Second')
   })
