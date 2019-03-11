@@ -185,7 +185,7 @@ function testDrawTriangle(){
 
 function main(){
 
-    var backgroundColor = [0.0, 1.0, 0.0, 1.0];
+    var backgroundColor = [0.0, 0.0, 0.0, 1.0];
 
     initializeWebGL();
 
