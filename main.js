@@ -48,15 +48,13 @@ function processUserInputs () {
         break
     }
   })
-
 }
 
-function drawTriangle (vertices, vertexShader, attributes) {
+function drawTriangle (vertices, vertexShader, fragShader, attributes) {
   var indices = [0, 1, 2]
-  var buffers = bindBuffers(vertices, indices)
-  var fragShader = FragShader('frag', attributes)
-  var shaders = [VertexShader(vertexShader), fragShader]
-  attachShaders(shaders, buffers)
+  var vertexBuffers = bindBuffers(vertices, indices)
+  var shaders = [VertexShader(vertexShader), FragShader(fragShader)]
+  attachShaders(shaders, vertexBuffers)
   // Draw the triangle
   gl.drawElements(gl.TRIANGLES, indices.length, gl.UNSIGNED_SHORT, 0)
 }
@@ -104,21 +102,15 @@ function VertexShader (vertCode) {
   gl.compileShader(vertShader)
   return vertShader
 }
-function FragShader (type, attributes) {
-  if (type == 'frag') {
-    // fragment shader source code
-    var fragCode =
-      'void main(void) {' + ' gl_FragColor = vec4' + attributes[0] + ';}'
+function FragShader (fragCode) {
+  // Create fragment shader object
+  var fragShader = gl.createShader(gl.FRAGMENT_SHADER)
 
-    // Create fragment shader object
-    var fragShader = gl.createShader(gl.FRAGMENT_SHADER)
+  // Attach fragment shader source code
+  gl.shaderSource(fragShader, fragCode)
 
-    // Attach fragment shader source code
-    gl.shaderSource(fragShader, fragCode)
-
-    // Compile the fragmentt shader
-    gl.compileShader(fragShader)
-  }
+  // Compile the fragmentt shader
+  gl.compileShader(fragShader)
   return fragShader
 }
 function attachShaders (shaders, buffers) {
@@ -174,21 +166,26 @@ function calculateFramesPerSecond (err, callback) {
   }
 }
 
-function loadShaderResources (shaderResources) {
-  for (i = 0, len = shaderResources.length; i < len; i++) {
-    loadTextResource(shaderResources[i], function (err, text) {
+function loadResourceCategory (resourceList, category) {
+  for (i = 0, len = resourceList.length; i < len; i++) {
+    loadTextResource(resourceList[i], function (err, text) {
       if (err) {
         console.log(err)
       } else {
-        var finalLength = resources.shaders.length
-        resources.shaders.length = finalLength + 1
-        var path = shaderResources[i - 1]
-        resources.shaders[
+        var finalLength = resources[category].length
+        resources[category].length = finalLength + 1
+        var path = resourceList[i - 1]
+        resources[category][
           path.substring(path.lastIndexOf('/') + 1, path.lastIndexOf('.'))
         ] = text
       }
     })
   }
+}
+
+function loadShaderResources (vertexShaderResources, fragShaderResources) {
+  loadResourceCategory(vertexShaderResources, 'vertexShaders')
+  loadResourceCategory(fragShaderResources, 'fragShaders')
 }
 
 function translate (vertices, x, y, z) {
@@ -214,8 +211,12 @@ function testDrawTriangle () {
     position.up - position.down,
     0
   )
-  var attributes = ['(1.0, 0.0, 0.0, 1.0)']
-  drawTriangle(vertices, resources.shaders.defaultVertexShader, attributes)
+  drawTriangle(
+    vertices,
+    resources.vertexShaders.defaultVertexShader,
+    resources.fragShaders.defaultShader
+    // attributes
+  )
   var vertices = [-0.5, -0.5, 0.0, 0.5, 0.5, 0.5, 0.5, -0.5, 1.0]
   translate(
     vertices,
@@ -223,14 +224,19 @@ function testDrawTriangle () {
     position.up - position.down,
     0
   )
-  attributes = ['(0.0, 0.0, 1.0, 1.0)']
-  drawTriangle(vertices, resources.shaders.defaultVertexShader, attributes)
+  drawTriangle(
+    vertices,
+    resources.vertexShaders.defaultVertexShader,
+    resources.fragShaders.defaultShader
+    // attributes
+  )
 }
 
 function main () {
   var backgroundColor = [0.0, 0.0, 0.0, 1.0]
 
-  shaderResourceList = ['shaders/defaultVertexShader.glsl']
+  vertexShaderResourceList = ['shaders/defaultVertexShader.glsl']
+  fragShaderResourceList = ['shaders/defaultShader.glsl']
 
   initializeWebGL()
   // for consistent call rate on keypress, call only millisecond
@@ -239,11 +245,15 @@ function main () {
     console.log(framesPerSecond + ' Frames Per Second')
   })
 
-  resources['shaders'] = { length: 0 }
-  loadShaderResources(shaderResourceList)
+  resources['vertexShaders'] = { length: 0 }
+  resources['fragShaders'] = { length: 0 }
+  loadShaderResources(vertexShaderResourceList, fragShaderResourceList)
 
   var loop = function () {
-    if (resources.shaders.length == shaderResourceList.length) {
+    if (
+      resources.vertexShaders.length + resources.fragShaders.length ==
+      vertexShaderResourceList.length + fragShaderResourceList.length
+    ) {
       clearCanvas(backgroundColor)
 
       testDrawTriangle()
