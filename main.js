@@ -166,6 +166,8 @@ function calculateFramesPerSecond (err, callback) {
   }
 }
 
+// code review: why have a resource list and category. This is a little
+// confusing 
 function loadResourceCategory (resourceList, category) {
   for (i = 0, len = resourceList.length; i < len; i++) {
     loadTextResource(resourceList[i], function (err, text) {
@@ -184,6 +186,9 @@ function loadResourceCategory (resourceList, category) {
 }
 
 function loadShaderResources (vertexShaderResources, fragShaderResources) {
+  // code review: 
+  // the name can hold the type
+  // all frag shader resources will be frag shaders
   loadResourceCategory(vertexShaderResources, 'vertexShaders')
   loadResourceCategory(fragShaderResources, 'fragShaders')
 }
@@ -198,7 +203,6 @@ function translate (vertices, x, y, z) {
     i++
     i++
   }
-  // console.log((vertices.length - 1)/3)
 }
 function testDrawTriangle () {
   /*
@@ -247,6 +251,7 @@ function main () {
 
   resources['vertexShaders'] = { length: 0 }
   resources['fragShaders'] = { length: 0 }
+  // code review: shorten name to vertexShaders and fragShaders
   loadShaderResources(vertexShaderResourceList, fragShaderResourceList)
 
   var loop = function () {
