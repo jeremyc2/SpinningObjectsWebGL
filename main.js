@@ -3,6 +3,8 @@ var frames
 var resources = {}
 var position = { up: 0, down: 0, left: 0, right: 0 }
 var velocity = 0.01
+vertexShaderPaths = ['shaders/defaultVertexShader.glsl']
+fragShaderPaths = ['shaders/defaultShader.glsl']
 
 function initializeWebGL () {
   frames = 0
@@ -239,9 +241,6 @@ function testDrawTriangle () {
 function main () {
   var backgroundColor = [0.0, 0.0, 0.0, 1.0]
 
-  vertexShaderResourceList = ['shaders/defaultVertexShader.glsl']
-  fragShaderResourceList = ['shaders/defaultShader.glsl']
-
   initializeWebGL()
   // for consistent call rate on keypress, call only millisecond
   setInterval(processUserInputs(), 1)
@@ -252,12 +251,12 @@ function main () {
   resources['vertexShaders'] = { length: 0 }
   resources['fragShaders'] = { length: 0 }
   // code review: shorten name to vertexShaders and fragShaders
-  loadShaderResources(vertexShaderResourceList, fragShaderResourceList)
+  loadShaderResources(vertexShaderPaths, fragShaderPaths)
 
   var loop = function () {
     if (
       resources.vertexShaders.length + resources.fragShaders.length ==
-      vertexShaderResourceList.length + fragShaderResourceList.length
+      vertexShaderPaths.length + fragShaderPaths.length
     ) {
       clearCanvas(backgroundColor)
 
