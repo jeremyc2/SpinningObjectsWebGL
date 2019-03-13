@@ -1,10 +1,14 @@
 var gl
 var frames
-var resources = {}
-var position = { up: 0, down: 0, left: 0, right: 0 }
-var velocity = 0.01
 vertexShaderPaths = ['shaders/defaultVertexShader.glsl']
 fragShaderPaths = ['shaders/defaultShader.glsl']
+var resources = {
+  length: 0,
+  fragShaders: { length: 0 },
+  vertexShaders: { length: 0 }
+}
+var position = { up: 0, down: 0, left: 0, right: 0 }
+var velocity = 0.01
 
 function initializeWebGL () {
   frames = 0
@@ -144,6 +148,17 @@ function attachShaders (shaders, buffers) {
 
   // Enable the attribute
   gl.enableVertexAttribArray(coord)
+
+  /* ======== Bind color to vertexShader ====================== */
+
+  // Get the attribute location
+  var color = gl.getAttribLocation(shaderProgram, 'color')
+
+  // Point an attribute to the currently bound VBO
+  gl.vertexAttribPointer(color, 4, gl.FLOAT, false, 0, 0)
+
+  // Enable the attribute
+  gl.enableVertexAttribArray(color)
 }
 
 function clearCanvas (backgroundColor) {
@@ -168,29 +183,24 @@ function calculateFramesPerSecond (err, callback) {
   }
 }
 
-// code review: why have a resource list and category. This is a little
-// confusing 
 function loadResourceCategory (resourceList, category) {
   for (i = 0, len = resourceList.length; i < len; i++) {
     loadTextResource(resourceList[i], function (err, text) {
       if (err) {
         console.log(err)
       } else {
-        var finalLength = resources[category].length
-        resources[category].length = finalLength + 1
         var path = resourceList[i - 1]
         resources[category][
           path.substring(path.lastIndexOf('/') + 1, path.lastIndexOf('.'))
         ] = text
+        resources[category].length++
+        resources.length++
       }
     })
   }
 }
 
 function loadShaderResources (vertexShaderResources, fragShaderResources) {
-  // code review: 
-  // the name can hold the type
-  // all frag shader resources will be frag shaders
   loadResourceCategory(vertexShaderResources, 'vertexShaders')
   loadResourceCategory(fragShaderResources, 'fragShaders')
 }
@@ -248,16 +258,11 @@ function main () {
     console.log(framesPerSecond + ' Frames Per Second')
   })
 
-  resources['vertexShaders'] = { length: 0 }
-  resources['fragShaders'] = { length: 0 }
-  // code review: shorten name to vertexShaders and fragShaders
   loadShaderResources(vertexShaderPaths, fragShaderPaths)
 
   var loop = function () {
-    if (
-      resources.vertexShaders.length + resources.fragShaders.length ==
-      vertexShaderPaths.length + fragShaderPaths.length
-    ) {
+    // TODO: Move this out of the loop
+    if (resources.length == vertexShaderPaths.length + fragShaderPaths.length) {
       clearCanvas(backgroundColor)
 
       testDrawTriangle()
