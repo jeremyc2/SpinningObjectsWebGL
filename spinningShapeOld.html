@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+    <head>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+            <meta name="description" content="Spinning Cube Demonstration">
+            <meta name="author" content="Jeremy & Justin Chandler">
+            <link rel="icon" href="cube-logo.png">
+        
+            <title>WebGL Demonstration</title>
+
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+            <!-- Main Class for graphics loop -->
+            <script src="mainTest.js"></script>
+
+            <script src="gl-matrix.js" type="text/javascript"></script>
+
+
+            <!-- For loading images and text documents -->
+            <script src="loader.js"></script>
+        
+            <!-- Custom styles -->
+            <link href="main.css" rel="stylesheet">
+
+
+        
+    </head>
+    <body onload="main()">
+
+    <div class="container">
+            <h2>The Great Spinning Cube!</h2>
+            <!-- Trigger the modal with a button -->
+            <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#instructions">Instructions</button>
+            
+            <!-- Modal -->
+            <div class="modal fade" id="instructions" role="dialog">
+                <div class="modal-dialog">
+                
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Instructions</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p>Welcome to the Spinning Cube demonstration!</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+    </div>
+
+    </br>
+    <canvas id="gl" width="640" style="margin: auto; display:block;" height="640">
+
+    </canvas>
+
+    </body>
+</html>

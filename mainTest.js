@@ -454,8 +454,8 @@ function main () {
       clearCanvas(backgroundColor)
 
       // testDrawTriangle()
-      executeDrawSquare()
-      // executeDrawCube()
+      // executeDrawSquare()
+      executeDrawCube()
 
       frames++
     }
