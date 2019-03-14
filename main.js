@@ -8,7 +8,27 @@ var resources = {
   vertexShaders: { length: 0 }
 }
 var position = { up: 0, down: 0, left: 0, right: 0 }
-var velocity = 0.01
+var velocity = 0.1
+
+function createParams (
+  name,
+  numComponents = 4,
+  arrayType = gl.ARRAY_BUFFER,
+  type = gl.FLOAT,
+  normalize = false,
+  stride = 0,
+  offset = 0
+) {
+  return {
+    name: name,
+    numComponents: numComponents,
+    type: type,
+    normalize: normalize,
+    stride: stride,
+    offset: offset,
+    arrayType: arrayType
+  }
+}
 
 function initializeWebGL () {
   frames = 0
@@ -56,109 +76,214 @@ function processUserInputs () {
   })
 }
 
-function drawTriangle (vertices, vertexShader, fragShader, attributes) {
-  var indices = [0, 1, 2]
-  var vertexBuffers = bindBuffers(vertices, indices)
-  var shaders = [VertexShader(vertexShader), FragShader(fragShader)]
-  attachShaders(shaders, vertexBuffers)
-  // Draw the triangle
-  gl.drawElements(gl.TRIANGLES, indices.length, gl.UNSIGNED_SHORT, 0)
+// function testDrawTriangle () {
+//   /*
+//         var vertices = [v1.x, v1.y, v1.z, v2.x, v2.y, v2.z, v3.x, v3.y, v3.z]
+//       */
+//   var vertices = [-0.5, 0.5, 0.0, -0.5, -0.5, 0.5, 0.5, 0.5, 1.0]
+//   drawTriangle(
+//     vertices,
+//     resources.vertexShaders.defaultVertexShader,
+//     resources.fragShaders.defaultShader
+//     // attributes
+//   )
+
+//   var vertices = [-0.5, -0.5, 0.0, 0.5, 0.5, 0.5, 0.5, -0.5, 1.0]
+//   drawTriangle(
+//     vertices,
+//     resources.vertexShaders.defaultVertexShader,
+//     resources.fragShaders.defaultShader
+//     // attributes
+//   )
+// }
+
+// function drawTriangle (
+//   vertices,
+//   vertexShader,
+//   fragShader,
+//   attributes,
+//   uniforms
+// ) {
+//   var indices = [0, 1, 2]
+//   var buffers = bindBuffers(vertices, indices, attributes)
+//   var shaders = [
+//     loadShader(gl.VERTEX_SHADER, vertexShader),
+//     loadShader(gl.FRAGMENT_SHADER, fragShader)
+//   ]
+//   attachShaders(shaders, buffers, uniforms)
+//   // Draw the triangle
+//   gl.drawElements(gl.TRIANGLES, indices.length, gl.UNSIGNED_SHORT, 0)
+// }
+
+function buildProjection () {
+  // Create a perspective matrix, a special matrix that is
+  // used to simulate the distortion of perspective in a camera.
+  // Our field of view is 45 degrees, with a width/height
+  // ratio that matches the display size of the canvas
+  // and we only want to see objects between 0.1 units
+  // and 100 units away from the camera.
+
+  const fieldOfView = (45 * Math.PI) / 180 // in radians
+  const aspect = gl.canvas.clientWidth / gl.canvas.clientHeight
+  const zNear = 0.1
+  const zFar = 100.0
+  const projectionMatrix = glMatrix.mat4.create()
+
+  // note: glmatrix.js always has the first argument
+  // as the destination to receive the result.
+  glMatrix.mat4.perspective(projectionMatrix, fieldOfView, aspect, zNear, zFar)
+
+  return projectionMatrix
 }
-function bindBuffers (vertices, indices) {
-  // Create an empty buffer object to store vertex buffer
-  var vertex_buffer = gl.createBuffer()
 
-  // Bind appropriate array buffer to it
-  gl.bindBuffer(gl.ARRAY_BUFFER, vertex_buffer)
+function buildModelView () {
+  // Set the drawing position to the "identity" point, which is
+  // the center of the scene.
+  const modelViewMatrix = glMatrix.mat4.create()
 
-  // Pass the vertex data to the buffer
-  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW)
+  // Now move the drawing position a bit to where we want to
+  // start drawing the square.
 
-  // Unbind the buffer
-  gl.bindBuffer(gl.ARRAY_BUFFER, null)
+  glMatrix.mat4.translate(
+    modelViewMatrix, // destination matrix
+    modelViewMatrix, // matrix to translate
+    [position.right - position.left, position.up - position.down, -6.0]
+  ) // amount to translate
 
-  // Create an empty buffer object to store Index buffer
-  var Index_Buffer = gl.createBuffer()
+  return modelViewMatrix
+}
 
-  // Bind appropriate array buffer to it
-  gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, Index_Buffer)
+function executeDrawSquare () {
+  var vertexData = [1.0, 1.0, -1.0, 1.0, 1.0, -1.0, -1.0, -1.0]
+  var params = createParams('aVertexPosition', 2)
+  var vertexBuffer = buildBuffer(params, vertexData)
 
-  // Pass the vertex data to the buffer
-  gl.bufferData(
-    gl.ELEMENT_ARRAY_BUFFER,
-    new Uint16Array(indices),
-    gl.STATIC_DRAW
+  var colorData = [
+    1.0, 1.0, 1.0, 1.0, // white
+    1.0, 0.0, 0.0, 1.0, // Red
+    0.0, 1.0, 0.0, 1.0, // Green
+    0.0, 0.0, 1.0, 1.0 // Blue
+  ]
+  params = createParams('aVertexColor')
+  var colorBuffer = buildBuffer(params, colorData)
+
+  // Can add more attributes
+  var buffers = [vertexBuffer, colorBuffer]
+
+  var uniforms = { modelView: buildModelView(), projection: buildProjection() }
+
+  drawSquare(
+    resources.vertexShaders.defaultVertexShader,
+    resources.fragShaders.defaultShader,
+    buffers,
+    uniforms
   )
-
-  // Unbind the buffer
-  gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, null)
-
-  var buffers = [vertex_buffer, Index_Buffer]
-
-  return buffers
 }
-function VertexShader (vertCode) {
-  // Create a vertex shader object
-  var vertShader = gl.createShader(gl.VERTEX_SHADER)
 
-  // Attach vertex shader source code
-  gl.shaderSource(vertShader, vertCode)
+function drawSquare (vertexShader, fragShader, buffers, uniforms) {
+  var shaders = [
+    loadShader(gl.VERTEX_SHADER, vertexShader),
+    loadShader(gl.FRAGMENT_SHADER, fragShader)
+  ]
+  attachShaders(shaders, buffers, uniforms)
 
-  // Compile the vertex shader
-  gl.compileShader(vertShader)
-  return vertShader
+  const offset = 0
+  const vertexCount = 4
+  gl.drawArrays(gl.TRIANGLE_STRIP, offset, vertexCount)
 }
-function FragShader (fragCode) {
-  // Create fragment shader object
-  var fragShader = gl.createShader(gl.FRAGMENT_SHADER)
 
-  // Attach fragment shader source code
-  gl.shaderSource(fragShader, fragCode)
+function buildBuffer (params, data) {
+  // Create an empty buffer object to store vertex buffer
+  const buffer = gl.createBuffer()
 
-  // Compile the fragmentt shader
-  gl.compileShader(fragShader)
-  return fragShader
+  // Bind appropriate array buffer to it
+  gl.bindBuffer(params.arrayType, buffer)
+
+  // Pass the data to the buffer
+  if (params.type == gl.FLOAT) {
+    gl.bufferData(params.arrayType, new Float32Array(data), gl.STATIC_DRAW)
+  } else if (params.arrayType == gl.ELEMENT_ARRAY_BUFFER) {
+    gl.bufferData(params.arrayType, new Uint16Array(data), gl.STATIC_DRAW)
+  } else {
+    alert('Buffer Type not Supported')
+  }
+
+  return {
+    data: buffer,
+    params: params
+  }
 }
-function attachShaders (shaders, buffers) {
-  // the combined shader program
+
+//
+// creates a shader of the given type, uploads the source and
+// compiles it.
+//
+function loadShader (type, source) {
+  const shader = gl.createShader(type)
+
+  // Send the source to the shader object
+
+  gl.shaderSource(shader, source)
+
+  // Compile the shader program
+
+  gl.compileShader(shader)
+
+  // See if it compiled successfully
+
+  if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+    alert(
+      'An error occurred compiling the shaders: ' + gl.getShaderInfoLog(shader)
+    )
+    gl.deleteShader(shader)
+    return null
+  }
+
+  return shader
+}
+function attachShaders (shaders, buffers, uniforms) {
   var shaderProgram = gl.createProgram()
-
   var shaderLength = shaders.length
   for (var i = 0; i < shaderLength; ++i) {
     gl.attachShader(shaderProgram, shaders[i])
   }
-  // Link both the programs
   gl.linkProgram(shaderProgram)
-
   // Use the combined shader program object
   gl.useProgram(shaderProgram)
 
-  // Bind vertex buffer object
-  gl.bindBuffer(gl.ARRAY_BUFFER, buffers[0])
+  // bind buffers and enable attributes
+  for (i = 0; i < buffers.length; i++) {
+    var buffer = buffers[i]
+    var params = buffer.params
+    if (params.arrayType != gl.ELEMENT_ARRAY_BUFFER) {
+      var location = gl.getAttribLocation(shaderProgram, params.name)
+      gl.bindBuffer(params.arrayType, buffer.data)
+      gl.vertexAttribPointer(
+        location,
+        params.numComponents,
+        params.type,
+        params.normalize,
+        params.stride,
+        params.offset
+      )
+      gl.enableVertexAttribArray(location)
+    } else {
+      gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, buffer.data)
+    }
+  }
 
-  // Bind index buffer object
-  gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, buffers[1])
-  /* ======= Associating shaders to buffer objects ======= */
+  // attach uniforms
+  var modelViewLocation = gl.getUniformLocation(
+    shaderProgram,
+    'uModelViewMatrix'
+  )
+  var projectionLocation = gl.getUniformLocation(
+    shaderProgram,
+    'uProjectionMatrix'
+  )
 
-  // Get the attribute location
-  var coord = gl.getAttribLocation(shaderProgram, 'coordinates')
-
-  // Point an attribute to the currently bound VBO
-  gl.vertexAttribPointer(coord, 3, gl.FLOAT, false, 0, 0)
-
-  // Enable the attribute
-  gl.enableVertexAttribArray(coord)
-
-  /* ======== Bind color to vertexShader ====================== */
-
-  // Get the attribute location
-  var color = gl.getAttribLocation(shaderProgram, 'color')
-
-  // Point an attribute to the currently bound VBO
-  gl.vertexAttribPointer(color, 4, gl.FLOAT, false, 0, 0)
-
-  // Enable the attribute
-  gl.enableVertexAttribArray(color)
+  gl.uniformMatrix4fv(projectionLocation, false, uniforms.projection)
+  gl.uniformMatrix4fv(modelViewLocation, false, uniforms.modelView)
 }
 
 function clearCanvas (backgroundColor) {
@@ -205,49 +330,6 @@ function loadShaderResources (vertexShaderResources, fragShaderResources) {
   loadResourceCategory(fragShaderResources, 'fragShaders')
 }
 
-function translate (vertices, x, y, z) {
-  var i = 0
-  while (i < vertices.length - 1) {
-    vertices[i] += x
-    vertices[i + 1] += y
-    vertices[i + 2] += z
-    i++
-    i++
-    i++
-  }
-}
-function testDrawTriangle () {
-  /*
-      var vertices = [v1.x, v1.y, v1.z, v2.x, v2.y, v2.z, v3.x, v3.y, v3.z]
-    */
-  var vertices = [-0.5, 0.5, 0.0, -0.5, -0.5, 0.5, 0.5, 0.5, 1.0]
-  translate(
-    vertices,
-    position.right - position.left,
-    position.up - position.down,
-    0
-  )
-  drawTriangle(
-    vertices,
-    resources.vertexShaders.defaultVertexShader,
-    resources.fragShaders.defaultShader
-    // attributes
-  )
-  var vertices = [-0.5, -0.5, 0.0, 0.5, 0.5, 0.5, 0.5, -0.5, 1.0]
-  translate(
-    vertices,
-    position.right - position.left,
-    position.up - position.down,
-    0
-  )
-  drawTriangle(
-    vertices,
-    resources.vertexShaders.defaultVertexShader,
-    resources.fragShaders.defaultShader
-    // attributes
-  )
-}
-
 function main () {
   var backgroundColor = [0.0, 0.0, 0.0, 1.0]
 
@@ -265,7 +347,8 @@ function main () {
     if (resources.length == vertexShaderPaths.length + fragShaderPaths.length) {
       clearCanvas(backgroundColor)
 
-      testDrawTriangle()
+      // testDrawTriangle()
+      executeDrawSquare()
 
       frames++
     }
