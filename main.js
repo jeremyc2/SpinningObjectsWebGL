@@ -284,6 +284,7 @@ function executeDrawCube(){
     buffers,
     uniforms
   )
+
 }
 
 function buildBuffer (paramsList, data) {
@@ -295,7 +296,7 @@ function buildBuffer (paramsList, data) {
   gl.bindBuffer(params.arrayType, buffer)
 
   // Pass the data to the buffer
-  if (params.type == gl.FLOAT) {
+  if (params.arrayType == gl.ARRAY_BUFFER) {
     gl.bufferData(params.arrayType, new Float32Array(data), gl.STATIC_DRAW)
   } else if (params.arrayType == gl.ELEMENT_ARRAY_BUFFER) {
     gl.bufferData(params.arrayType, new Uint16Array(data), gl.STATIC_DRAW)
@@ -354,6 +355,8 @@ function attachShaders (shaders, buffers, uniforms) {
       var params = paramsList[j]
       if (params.arrayType != gl.ELEMENT_ARRAY_BUFFER) {
           var location = gl.getAttribLocation(shaderProgram, params.name)
+          // This is for multiple attributes coming from the same buffer
+          // only bind it once 
           if (j < 1){
             gl.bindBuffer(params.arrayType, buffer.data)
           }
@@ -445,8 +448,8 @@ function main () {
       clearCanvas(backgroundColor)
 
       // testDrawTriangle()
-      executeDrawSquare()
-      // executeDrawCube()
+      // executeDrawSquare()
+      executeDrawCube()
 
       frames++
     }
