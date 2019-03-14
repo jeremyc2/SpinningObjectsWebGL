@@ -76,44 +76,34 @@ function processUserInputs () {
   })
 }
 
-// function testDrawTriangle () {
-//   /*
-//         var vertices = [v1.x, v1.y, v1.z, v2.x, v2.y, v2.z, v3.x, v3.y, v3.z]
-//       */
-//   var vertices = [-0.5, 0.5, 0.0, -0.5, -0.5, 0.5, 0.5, 0.5, 1.0]
-//   drawTriangle(
-//     vertices,
-//     resources.vertexShaders.defaultVertexShader,
-//     resources.fragShaders.defaultShader
-//     // attributes
-//   )
+function testDrawTriangle () {
 
-//   var vertices = [-0.5, -0.5, 0.0, 0.5, 0.5, 0.5, 0.5, -0.5, 1.0]
-//   drawTriangle(
-//     vertices,
-//     resources.vertexShaders.defaultVertexShader,
-//     resources.fragShaders.defaultShader
-//     // attributes
-//   )
-// }
+  // TODO: Fix this to use vec4 and not vec3
+  //       add build buffers
+  /*
+        var vertices = [v1.x, v1.y, v1.z, v2.x, v2.y, v2.z, v3.x, v3.y, v3.z]
+      */
 
-// function drawTriangle (
-//   vertices,
-//   vertexShader,
-//   fragShader,
-//   attributes,
-//   uniforms
-// ) {
-//   var indices = [0, 1, 2]
-//   var buffers = bindBuffers(vertices, indices, attributes)
-//   var shaders = [
-//     loadShader(gl.VERTEX_SHADER, vertexShader),
-//     loadShader(gl.FRAGMENT_SHADER, fragShader)
-//   ]
-//   attachShaders(shaders, buffers, uniforms)
-//   // Draw the triangle
-//   gl.drawElements(gl.TRIANGLES, indices.length, gl.UNSIGNED_SHORT, 0)
-// }
+  var uniforms = { modelView: buildModelView(), projection: buildProjection() }
+
+  drawTriangle(
+    resources.vertexShaders.defaultVertexShader,
+    resources.fragShaders.defaultShader,
+    buffers,
+    uniforms
+  )
+
+}
+
+function drawTriangle (vertexShader, fragShader, buffers, uniforms) {
+  var shaders = [
+    loadShader(gl.VERTEX_SHADER, vertexShader),
+    loadShader(gl.FRAGMENT_SHADER, fragShader)
+  ]
+  attachShaders(shaders, buffers, uniforms)
+  // Draw the triangle
+  gl.drawElements(gl.TRIANGLES, indices.length, gl.UNSIGNED_SHORT, 0)
+}
 
 function buildProjection () {
   // Create a perspective matrix, a special matrix that is
