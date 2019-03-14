@@ -180,6 +180,9 @@ function drawSquare (vertexShader, fragShader, buffers, uniforms) {
   ]
   attachShaders(shaders, buffers, uniforms)
 
+  const offset = 0
+  const vertexCount = 4
+  gl.drawArrays(gl.TRIANGLE_STRIP, offset, vertexCount)
 }
 
 function drawCube (vertexShader, fragShader, boxIndicesLength, buffers, uniforms) {
@@ -281,7 +284,6 @@ function executeDrawCube(){
     buffers,
     uniforms
   )
-
 }
 
 function buildBuffer (paramsList, data) {
