@@ -462,3 +462,44 @@ function main () {
 
   requestAnimationFrame(loop)
 }
+
+// const vertexShaderSource = `
+//   attribute vec2 position;
+//   varying vec2 v_coord;
+
+//   void main() {
+//     gl_Position = vec4(position, 0, 1);
+//     v_coord = gl_Position.xy * 0.5 + 0.5;
+//   }
+// `;
+
+// const fragmentShaderSource = `
+// 	precision mediump float;
+//   varying vec2 v_coord;
+//   uniform sampler2D u_texture;
+  
+//   void main() {
+//   	vec4 sampleColor = texture2D(u_texture, vec2(v_coord.x, 1.0 - v_coord.y));
+//     gl_FragColor = sampleColor;
+// 	}
+// `;
+
+// const texture = gl.createTexture();
+// texture.image = new Image();
+// texture.image.onload = function() {
+//   handleLoadedTexture(gl, texture);
+// };
+// texture.image.crossOrigin = '';
+// texture.image.src = 'image link';
+
+
+// function handleLoadedTexture(gl, texture, callback) {
+//   gl.bindTexture(gl.TEXTURE_2D, texture);
+//   gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+//   gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+//   gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
+//   gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
+//   gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, texture.image);
+//   gl.drawArrays(gl.TRIANGLES, 0, 6);
+// }
+
