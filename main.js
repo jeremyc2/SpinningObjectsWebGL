@@ -1,5 +1,7 @@
 var gl
 var frames
+var canvasWidth = 4
+var canvasHeight = 4;
 vertexShaderPaths = ['shaders/defaultVertexShader.glsl']
 fragShaderPaths = ['shaders/defaultShader.glsl']
 var resources = {
@@ -32,7 +34,6 @@ function createParams (
 
 function initializeWebGL () {
   frames = 0
-
   var canvas = document.getElementById('gl')
 
   gl =
@@ -49,7 +50,6 @@ function initializeWebGL () {
 
     // Set the view port
     gl.viewport(0, 0, canvas.width, canvas.height)
-
     // Enable the depth test
     gl.enable(gl.DEPTH_TEST)
     gl.enable(gl.CULL_FACE);
@@ -64,15 +64,19 @@ function processUserInputs () {
   $(document).keydown(function (e) {
     switch (e.keyCode) {
       case 65: // left (a)
+        if (position.left - position.right <= canvasWidth)
         position.left = position.left + velocity
         break
       case 68: // right (d)
+        if (position.left - position.right >= -canvasWidth)
         position.right = position.right + velocity
         break
       case 83: // down (s)
+        if (position.up - position.down >= -canvasHeight)
         position.down = position.down + velocity
         break
       case 87: // up (w)
+      if (position.up - position.down <= canvasHeight)
         position.up = position.up + velocity
         break
     }
@@ -142,7 +146,6 @@ function buildModelView () {
     modelViewMatrix, // matrix to translate
     [position.right - position.left, position.up - position.down, -6.0]
   ) // amount to translate
-
   return modelViewMatrix
 }
 
