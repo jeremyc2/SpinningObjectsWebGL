@@ -6,9 +6,9 @@ var resources = {
   length: 0,
   fragShaders: { length: 0 },
   vertexShaders: { length: 0 },
-  images: []
+  images: { length: 0}
 }
-var imagePaths = ['boxSide.jpg','fullRubix.jpg']
+var imagePaths = ['boxSide.jpg','fullRubix.jpg', 'SusanTexture.png']
 
 function createParams (
   name,
@@ -212,6 +212,9 @@ function drawObjects () {
   if (buttons.rubiksButton == 1) {
     executeDrawRubiksCube()
   }
+  if (buttons.suzanneButton == 1) {
+    executeDrawSuzanne()
+  }
 }
 
 function main () {
@@ -225,16 +228,8 @@ function main () {
   })
 
   loadShaderResources(vertexShaderPaths, fragShaderPaths)
-  for (var i = 0, len = imagePaths.length; i < len; i++) {
-    loadImage(imagePaths[i], function (err, image) {
-      if (err) {
-        console.log(err)
-      } else {
-        resources.length++
-        resources.images[resources.images.length] = image
-      }
-    })
-  }
+
+  loadResourceCategory(imagePaths,"images", loadImage)
 
   var loop = function () {
     if (

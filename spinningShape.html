@@ -17,6 +17,9 @@
 
     <script src="gl-matrix.js" type="text/javascript"></script>
 
+    <!-- TODO: load me instead -->
+    <script src="suzanne.js"></script>
+
     <!-- Main Class for graphics loop -->
     <script src="main.js"></script>
 
@@ -45,6 +48,8 @@
             $("#imageCubeButton").css("color", "black");
             $("#pyramidButton").css("background-color", "white");
             $("#pyramidButton").css("color", "black");
+            $("#suzanneButton").css("background-color", "white");
+            $("#suzanneButton").css("color", "black");
             $("#rubiksButton").css("background-color", "white");
             $("#rubiksButton").css("color", "black");
             $("#rubiksButton").click(function () {
@@ -64,6 +69,9 @@
             })
             $("#pyramidButton").click(function () {
                 buttonClick("pyramidButton")
+            })
+            $("#suzanneButton").click(function () {
+                buttonClick("suzanneButton")
             })
         })
     </script>
@@ -113,6 +121,7 @@
         <button type="button" class="btn btn-info btn-lg" id="imageCubeButton">Granite Cube</button>
         <button type="button" class="btn btn-info btn-lg" id="pyramidButton">Pyramid</button>
         <button type="button" class="btn btn-info btn-lg" id="rubiksButton">Rubiks Cube</button>
+        <button type="button" class="btn btn-info btn-lg" id="suzanneButton">Suzanne</button>
     </div>
 
 

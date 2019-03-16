@@ -12,10 +12,10 @@ var loadTextResource = function (url, i, callback) {
   request.send()
 }
 
-var loadImage = function (url, callback) {
+var loadImage = function (url, i, callback) {
   var image = new Image()
   image.onload = function () {
-    callback(null, image)
+    callback(null, image, i)
   }
   image.src = url
 }
@@ -34,9 +34,9 @@ var loadJSONResource = function (url, callback) {
   })
 }
 
-function loadResourceCategory (resourceList, category) {
+function loadResourceCategory (resourceList, category, callback) {
   for (var index = 0, len = resourceList.length; index < len; index++) {
-    loadTextResource(resourceList[index], index, function (err, text, i) {
+    callback(resourceList[index], index, function (err, text, i) {
       if (err) {
         console.log(err)
       } else {
@@ -52,6 +52,6 @@ function loadResourceCategory (resourceList, category) {
 }
 
 function loadShaderResources (vertexShaderResources, fragShaderResources) {
-  loadResourceCategory(vertexShaderResources, 'vertexShaders')
-  loadResourceCategory(fragShaderResources, 'fragShaders')
+  loadResourceCategory(vertexShaderResources, 'vertexShaders', loadTextResource)
+  loadResourceCategory(fragShaderResources, 'fragShaders', loadTextResource)
 }
