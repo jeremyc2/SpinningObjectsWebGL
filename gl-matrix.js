@@ -542,7 +542,7 @@ THE SOFTWARE.
       mul: mul,
       sub: sub
     });
-  
+  //
     /**
      * 2x3 Matrix
      * @module mat2d
@@ -2685,6 +2685,7 @@ THE SOFTWARE.
       out[15] = 1;
       return out;
     }
+
     /**
      * Creates a matrix from a given angle around a given axis
      * This is equivalent to (but much faster than):

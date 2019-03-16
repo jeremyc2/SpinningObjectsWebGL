@@ -23,7 +23,6 @@ function buildModelView () {
   // Set the drawing position to the "identity" point, which is
   // the center of the scene.
   const modelViewMatrix = glMatrix.mat4.create()
-
   // Now move the drawing position a bit to where we want to
   // start drawing the square.
 
@@ -48,5 +47,9 @@ function buildModelView () {
     modelViewMatrix, // matrix to translate
     rotate.z
   ) // amount to translate
+  var scaleArray = [scale, scale, scale]
+  //scale4x4(modelViewMatrix, scaleArray)
+    glMatrix.mat4.scale(modelViewMatrix, modelViewMatrix, scaleArray)
   return modelViewMatrix
 }
+

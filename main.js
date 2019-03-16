@@ -8,7 +8,7 @@ var resources = {
   vertexShaders: { length: 0 },
   images: []
 }
-var imagePaths = ['boxSide.jpg']
+var imagePaths = ['boxSide.jpg','rubiksGreen.png','rubiksRed.png','rubiksBlue.png','rubiksOrange.png','rubiksWhite.png','rubiksYellow.png']
 
 function createParams (
   name,
@@ -203,8 +203,14 @@ function drawObjects () {
   if (buttons.plusButton == 1) {
     executeDrawPlus()
   }
-  if (buttons.imageCube == 1) {
+  if (buttons.imageCubeButton == 1) {
     executeDrawTextureCube()
+  }
+  if (buttons.pyramidButton == 1) {
+    executeDrawPyramid()
+  }
+  if (buttons.rubiksButton == 1) {
+    executeDrawRubiksCube()
   }
 }
 
@@ -238,10 +244,7 @@ function main () {
       clearCanvas(backgroundColor)
 
       drawObjects()
-      // testDrawTriangle()
-      // executeDrawSquare()
-      // executeDrawCube()
-      // executeDrawTextureCube()
+
       frames++
     }
 

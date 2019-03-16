@@ -33,13 +33,6 @@
 
     <!-- Custom styles -->
     <link href="main.css" rel="stylesheet">
-    <style>
-        .center {
-            margin: auto;
-            width: 30%;
-            padding: 10px;
-        }
-    </style>
     <script>
         $(document).ready(function () {
             $("#cubeButton").css("background-color", "white");
@@ -48,20 +41,29 @@
             $("#squareButton").css("color", "black");
             $("#plusButton").css("background-color", "white");
             $("#plusButton").css("color", "black");
-            $("#imageCube").css("background-color", "white");
-            $("#imageCube").css("color", "black");
-
+            $("#imageCubeButton").css("background-color", "white");
+            $("#imageCubeButton").css("color", "black");
+            $("#pyramidButton").css("background-color", "white");
+            $("#pyramidButton").css("color", "black");
+            $("#rubiksButton").css("background-color", "white");
+            $("#rubiksButton").css("color", "black");
+            $("#rubiksButton").click(function () {
+                buttonClick("rubiksButton")
+            })
             $("#cubeButton").click(function () {
                 buttonClick("cubeButton")
             })
-            $("#imageCube").click(function () {
-                buttonClick("imageCube")
+            $("#imageCubeButton").click(function () {
+                buttonClick("imageCubeButton")
             })
             $("#squareButton").click(function () {
                 buttonClick("squareButton")
             })
             $("#plusButton").click(function () {
                 buttonClick("plusButton")
+            })
+            $("#pyramidButton").click(function () {
+                buttonClick("pyramidButton")
             })
         })
     </script>
@@ -108,7 +110,9 @@
         <button type="button" class="btn btn-info btn-lg" id="cubeButton">Cube</button>
         <button type="button" class="btn btn-info btn-lg" id="squareButton">Square</button>
         <button type="button" class="btn btn-info btn-lg" id="plusButton">Plus</button>
-        <button type="button" class="btn btn-info btn-lg" id="imageCube">Granite Cube</button>
+        <button type="button" class="btn btn-info btn-lg" id="imageCubeButton">Granite Cube</button>
+        <button type="button" class="btn btn-info btn-lg" id="pyramidButton">Pyramid</button>
+        <button type="button" class="btn btn-info btn-lg" id="rubiksButton">Rubiks Cube</button>
     </div>
 
 
