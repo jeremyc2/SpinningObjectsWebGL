@@ -2,13 +2,15 @@ var gl
 var frames
 var canvasWidth = 4
 var canvasHeight = 4;
-vertexShaderPaths = ['shaders/defaultVertexShader.glsl']
-fragShaderPaths = ['shaders/defaultShader.glsl']
+vertexShaderPaths = ['shaders/imageVertShader.glsl']
+fragShaderPaths = ['shaders/imageFragShader.glsl']
 var resources = {
   length: 0,
   fragShaders: { length: 0 },
-  vertexShaders: { length: 0 }
+  vertexShaders: { length: 0 },
+  images: []
 }
+var imagePaths = ["boxSide.jpg"]
 var position = { up: 0, down: 0, left: 0, right: 0 }
 var velocity = 0.1
 
@@ -290,6 +292,117 @@ function executeDrawCube(){
 
 }
 
+function executeDrawTextureCube(){
+  
+  var vertexData = 
+	[ // X, Y, Z           U, V
+		// Top
+		-1.0, 1.0, -1.0,   0, 0,
+		-1.0, 1.0, 1.0,    0, 1,
+		1.0, 1.0, 1.0,     1, 1,
+		1.0, 1.0, -1.0,    1, 0,
+
+		// Left
+		-1.0, 1.0, 1.0,    0, 0,
+		-1.0, -1.0, 1.0,   1, 0,
+		-1.0, -1.0, -1.0,  1, 1,
+		-1.0, 1.0, -1.0,   0, 1,
+
+		// Right
+		1.0, 1.0, 1.0,    1, 1,
+		1.0, -1.0, 1.0,   0, 1,
+		1.0, -1.0, -1.0,  0, 0,
+		1.0, 1.0, -1.0,   1, 0,
+
+		// Front
+		1.0, 1.0, 1.0,    1, 1,
+		1.0, -1.0, 1.0,    1, 0,
+		-1.0, -1.0, 1.0,    0, 0,
+		-1.0, 1.0, 1.0,    0, 1,
+
+		// Back
+		1.0, 1.0, -1.0,    0, 0,
+		1.0, -1.0, -1.0,    0, 1,
+		-1.0, -1.0, -1.0,    1, 1,
+		-1.0, 1.0, -1.0,    1, 0,
+
+		// Bottom
+		-1.0, -1.0, -1.0,   1, 1,
+		-1.0, -1.0, 1.0,    1, 0,
+		1.0, -1.0, 1.0,     0, 0,
+		1.0, -1.0, -1.0,    0, 1,
+	];
+
+  
+  var params = [createParams('aVertexPosition', 3, gl.ARRAY_BUFFER, gl.FLOAT, gl.FALSE, 5 * Float32Array.BYTES_PER_ELEMENT, 0), 
+                  createParams('aVertexTexCoord', 2, gl.ARRAY_BUFFER, gl.FLOAT, gl.FALSE, 5 * Float32Array.BYTES_PER_ELEMENT, 3 * Float32Array.BYTES_PER_ELEMENT)]
+  var vertexBuffer = buildBuffer(params, vertexData)
+
+	var boxIndices =
+	[
+		// Top
+		0, 1, 2,
+		0, 2, 3,
+
+		// Left
+		5, 4, 6,
+		6, 4, 7,
+
+		// Right
+		8, 9, 10,
+		8, 10, 11,
+
+		// Front
+		13, 12, 14,
+		15, 14, 12,
+
+		// Back
+		16, 17, 18,
+		16, 18, 19,
+
+		// Bottom
+		21, 20, 22,
+		22, 20, 23
+  ];
+
+  params = [createParams('indices',6,gl.ELEMENT_ARRAY_BUFFER)]
+  var indicesBuffer = buildBuffer(params, boxIndices)
+
+  // Can add more attributes
+  var buffers = [vertexBuffer, indicesBuffer]
+
+  // TODO: Change Me
+  var uniforms = [ {name: 'uModelViewMatrix', matrix: buildModelView()}, {name: 'uProjectionMatrix',matrix: buildProjection()} ]
+
+  bindTexture(resources.images[0])
+  
+  drawCube(
+    resources.vertexShaders.imageVertShader,
+    resources.fragShaders.imageFragShader,
+    boxIndices.length,
+    buffers,
+    uniforms
+  )
+
+}
+
+function bindTexture(image){
+	//
+	// Create texture
+	//
+	var boxTexture = gl.createTexture();
+	gl.bindTexture(gl.TEXTURE_2D, boxTexture);
+	gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+	gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+	gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+	gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+	gl.texImage2D(
+		gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA,
+		gl.UNSIGNED_BYTE,
+		image
+	);
+}
+
 function buildBuffer (paramsList, data) {
   params = paramsList[0]
   // Create an empty buffer object to store vertex buffer
@@ -444,15 +557,28 @@ function main () {
   })
 
   loadShaderResources(vertexShaderPaths, fragShaderPaths)
+  
+  for (i = 0, len = imagePaths.length; i < len; i++){
+    loadImage(imagePaths[i],function(err, image){
+      if(err){
+        console.log(err)
+      }
+      else{
+        resources.length++
+        resources.images[resources.images.length] = image
+      }
+    })
+  }
 
   var loop = function () {
     // TODO: Move this out of the loop
-    if (resources.length == vertexShaderPaths.length + fragShaderPaths.length) {
+    if (resources.length == vertexShaderPaths.length + fragShaderPaths.length + imagePaths.length) {
       clearCanvas(backgroundColor)
 
       // testDrawTriangle()
       // executeDrawSquare()
-      executeDrawCube()
+      // executeDrawCube()
+      executeDrawTextureCube()
 
       frames++
     }
@@ -462,44 +588,4 @@ function main () {
 
   requestAnimationFrame(loop)
 }
-
-// const vertexShaderSource = `
-//   attribute vec2 position;
-//   varying vec2 v_coord;
-
-//   void main() {
-//     gl_Position = vec4(position, 0, 1);
-//     v_coord = gl_Position.xy * 0.5 + 0.5;
-//   }
-// `;
-
-// const fragmentShaderSource = `
-// 	precision mediump float;
-//   varying vec2 v_coord;
-//   uniform sampler2D u_texture;
-  
-//   void main() {
-//   	vec4 sampleColor = texture2D(u_texture, vec2(v_coord.x, 1.0 - v_coord.y));
-//     gl_FragColor = sampleColor;
-// 	}
-// `;
-
-// const texture = gl.createTexture();
-// texture.image = new Image();
-// texture.image.onload = function() {
-//   handleLoadedTexture(gl, texture);
-// };
-// texture.image.crossOrigin = '';
-// texture.image.src = 'image link';
-
-
-// function handleLoadedTexture(gl, texture, callback) {
-//   gl.bindTexture(gl.TEXTURE_2D, texture);
-//   gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
-//   gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
-//   gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
-//   gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
-//   gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, texture.image);
-//   gl.drawArrays(gl.TRIANGLES, 0, 6);
-// }
 
