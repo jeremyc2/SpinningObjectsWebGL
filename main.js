@@ -2,8 +2,8 @@ var gl
 var frames
 var canvasWidth = 4
 var canvasHeight = 4;
-vertexShaderPaths = ['shaders/imageVertShader.glsl']
-fragShaderPaths = ['shaders/imageFragShader.glsl']
+vertexShaderPaths = ['shaders/imageVertShader.glsl','shaders/defaultVertexShader.glsl']
+fragShaderPaths = ['shaders/imageFragShader.glsl','shaders/defaultShader.glsl']
 var resources = {
   length: 0,
   fragShaders: { length: 0 },
@@ -530,7 +530,7 @@ function loadResourceCategory (resourceList, category) {
       if (err) {
         console.log(err)
       } else {
-        var path = resourceList[i - 1]
+        var path = resourceList[i]
         resources[category][
           path.substring(path.lastIndexOf('/') + 1, path.lastIndexOf('.'))
         ] = text
