@@ -1,14 +1,7 @@
 var gl
 var frames
-<<<<<<< HEAD
-var canvasWidth = 4
-var canvasHeight = 4;
-vertexShaderPaths = ['shaders/imageVertShader.glsl','shaders/defaultVertexShader.glsl']
-fragShaderPaths = ['shaders/imageFragShader.glsl','shaders/defaultShader.glsl']
-=======
 vertexShaderPaths = ['shaders/defaultVertexShader.glsl']
 fragShaderPaths = ['shaders/defaultShader.glsl']//'shaders/defaultShader.glsl'] // 'shaders/imageFragShader.glsl'
->>>>>>> 558fe89a1070dd2ba96c90db59bd3a917183f469
 var resources = {
   length: 0,
   fragShaders: { length: 0 },
