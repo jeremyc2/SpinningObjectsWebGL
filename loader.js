@@ -33,3 +33,25 @@ var loadJSONResource = function (url, callback) {
     }
   })
 }
+
+function loadResourceCategory (resourceList, category) {
+  for (var index = 0, len = resourceList.length; index < len; index++) {
+    loadTextResource(resourceList[index], index, function (err, text, i) {
+      if (err) {
+        console.log(err)
+      } else {
+        var path = resourceList[i]
+        resources[category][
+          path.substring(path.lastIndexOf('/') + 1, path.lastIndexOf('.'))
+        ] = text
+        resources[category].length++
+        resources.length++
+      }
+    })
+  }
+}
+
+function loadShaderResources (vertexShaderResources, fragShaderResources) {
+  loadResourceCategory(vertexShaderResources, 'vertexShaders')
+  loadResourceCategory(fragShaderResources, 'fragShaders')
+}
