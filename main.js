@@ -1,7 +1,7 @@
 var gl
 var frames
 vertexShaderPaths = ['shaders/defaultVertexShader.glsl']
-fragShaderPaths = ['shaders/defaultShader.glsl'] // 'shaders/imageFragShader.glsl'
+fragShaderPaths = ['shaders/defaultShader.glsl']//'shaders/defaultShader.glsl'] // 'shaders/imageFragShader.glsl'
 var resources = {
   length: 0,
   fragShaders: { length: 0 },
@@ -302,6 +302,117 @@ function bindTexture (image) {
   gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, image)
 }
 
+function executeDrawTextureCube(){
+  
+  var vertexData = 
+	[ // X, Y, Z           U, V
+		// Top
+		-1.0, 1.0, -1.0,   0, 0,
+		-1.0, 1.0, 1.0,    0, 1,
+		1.0, 1.0, 1.0,     1, 1,
+		1.0, 1.0, -1.0,    1, 0,
+
+		// Left
+		-1.0, 1.0, 1.0,    0, 0,
+		-1.0, -1.0, 1.0,   1, 0,
+		-1.0, -1.0, -1.0,  1, 1,
+		-1.0, 1.0, -1.0,   0, 1,
+
+		// Right
+		1.0, 1.0, 1.0,    1, 1,
+		1.0, -1.0, 1.0,   0, 1,
+		1.0, -1.0, -1.0,  0, 0,
+		1.0, 1.0, -1.0,   1, 0,
+
+		// Front
+		1.0, 1.0, 1.0,    1, 1,
+		1.0, -1.0, 1.0,    1, 0,
+		-1.0, -1.0, 1.0,    0, 0,
+		-1.0, 1.0, 1.0,    0, 1,
+
+		// Back
+		1.0, 1.0, -1.0,    0, 0,
+		1.0, -1.0, -1.0,    0, 1,
+		-1.0, -1.0, -1.0,    1, 1,
+		-1.0, 1.0, -1.0,    1, 0,
+
+		// Bottom
+		-1.0, -1.0, -1.0,   1, 1,
+		-1.0, -1.0, 1.0,    1, 0,
+		1.0, -1.0, 1.0,     0, 0,
+		1.0, -1.0, -1.0,    0, 1,
+	];
+
+  
+  var params = [createParams('aVertexPosition', 3, gl.ARRAY_BUFFER, gl.FLOAT, gl.FALSE, 5 * Float32Array.BYTES_PER_ELEMENT, 0), 
+                  createParams('aVertexTexCoord', 2, gl.ARRAY_BUFFER, gl.FLOAT, gl.FALSE, 5 * Float32Array.BYTES_PER_ELEMENT, 3 * Float32Array.BYTES_PER_ELEMENT)]
+  var vertexBuffer = buildBuffer(params, vertexData)
+
+	var boxIndices =
+	[
+		// Top
+		0, 1, 2,
+		0, 2, 3,
+
+		// Left
+		5, 4, 6,
+		6, 4, 7,
+
+		// Right
+		8, 9, 10,
+		8, 10, 11,
+
+		// Front
+		13, 12, 14,
+		15, 14, 12,
+
+		// Back
+		16, 17, 18,
+		16, 18, 19,
+
+		// Bottom
+		21, 20, 22,
+		22, 20, 23
+  ];
+
+  params = [createParams('indices',6,gl.ELEMENT_ARRAY_BUFFER)]
+  var indicesBuffer = buildBuffer(params, boxIndices)
+
+  // Can add more attributes
+  var buffers = [vertexBuffer, indicesBuffer]
+
+  // TODO: Change Me
+  var uniforms = [ {name: 'uModelViewMatrix', matrix: buildModelView()}, {name: 'uProjectionMatrix',matrix: buildProjection()} ]
+
+  bindTexture(resources.images[0])
+  
+  drawCube(
+    resources.vertexShaders.imageVertShader,
+    resources.fragShaders.imageFragShader,
+    boxIndices.length,
+    buffers,
+    uniforms
+  )
+
+}
+
+function bindTexture(image){
+	//
+	// Create texture
+	//
+	var boxTexture = gl.createTexture();
+	gl.bindTexture(gl.TEXTURE_2D, boxTexture);
+	gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+	gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+	gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+	gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+	gl.texImage2D(
+		gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA,
+		gl.UNSIGNED_BYTE,
+		image
+	);
+}
+
 function buildBuffer (paramsList, data) {
   params = paramsList[0]
   // Create an empty buffer object to store vertex buffer
@@ -483,11 +594,11 @@ function main () {
     ) {
       clearCanvas(backgroundColor)
 
-      // drawObjects()
+      drawObjects()
       // testDrawTriangle()
       // executeDrawSquare()
       // executeDrawCube()
-      executeDrawTextureCube()
+      // executeDrawTextureCube()
       frames++
     }
 
@@ -496,3 +607,4 @@ function main () {
 
   requestAnimationFrame(loop)
 }
+
