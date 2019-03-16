@@ -1,7 +1,7 @@
 var gl
 var frames
-vertexShaderPaths = ['shaders/defaultVertexShader.glsl']
-fragShaderPaths = ['shaders/defaultShader.glsl']//'shaders/defaultShader.glsl'] // 'shaders/imageFragShader.glsl'
+vertexShaderPaths = ['shaders/defaultVertexShader.glsl', 'shaders/imageVertShader.glsl']
+fragShaderPaths = ['shaders/defaultShader.glsl', 'shaders/imageFragShader.glsl']
 var resources = {
   length: 0,
   fragShaders: { length: 0 },
@@ -532,8 +532,8 @@ function calculateFramesPerSecond (err, callback) {
 }
 
 function loadResourceCategory (resourceList, category) {
-  for (i = 0, len = resourceList.length; i < len; i++) {
-    loadTextResource(resourceList[i], function (err, text) {
+  for (var index = 0, len = resourceList.length; index < len; index++) {
+    loadTextResource(resourceList[index], index, function (err, text, i) {
       if (err) {
         console.log(err)
       } else {
@@ -563,6 +563,9 @@ function drawObjects () {
   if (buttons.plusButton == 1) {
     executeDrawPlus()
   }
+  if (buttons.imageCube == 1) {
+    executeDrawTextureCube()
+  }
 }
 
 function main () {
@@ -576,7 +579,7 @@ function main () {
   })
 
   loadShaderResources(vertexShaderPaths, fragShaderPaths)
-  for (i = 0, len = imagePaths.length; i < len; i++) {
+  for (var i = 0, len = imagePaths.length; i < len; i++) {
     loadImage(imagePaths[i], function (err, image) {
       if (err) {
         console.log(err)

@@ -4,7 +4,7 @@ var translateVelocity = 0.1
 var rotateVelocity = 0.1
 var canvasWidth = 4
 var canvasHeight = 4
-var buttons = { cubeButton: 0, squareButton: 0, plusButton: 0 }
+var buttons = { cubeButton: 0, squareButton: 0, plusButton: 0, imageCube: 0}
 
 function buttonClick (id) {
   var buttonDOM = document.getElementById(id)
