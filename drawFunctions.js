@@ -1303,7 +1303,7 @@ function executeDrawTextureCube () {
     { name: 'uProjectionMatrix', matrix: buildProjection() }
   ]
 
-  bindTexture(resources.images[0])
+  bindTexture(resources.images[1])
 
   drawCube(
     resources.vertexShaders.imageVertShader,
@@ -1445,7 +1445,7 @@ function executeDrawRubiksCube () {
     { name: 'uProjectionMatrix', matrix: buildProjection() }
   ]
 
-  bindTexture(resources.images[1])
+  bindTexture(resources.images[0])
 
   drawCube(
     resources.vertexShaders.imageVertShader,
