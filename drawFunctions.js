@@ -1699,6 +1699,8 @@ function executeDrawSuzanne () {
 
 function executeDrawTRex () {
   // http://www.greentoken.de/onlineconv/ to convert OBJ to json
+  // Model from https://www.turbosquid.com
+  // Convert quads to triangles in Blender
   var vertexData = TRex.meshes[0].vertices
   var params = [
     createParams(
