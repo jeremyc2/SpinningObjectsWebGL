@@ -1646,13 +1646,6 @@ function executeDrawPyramid () {
 
 
 function executeDrawSuzanne () {
-  /*
-    "The, dare I say, best solution is to put all of the images in 
-    1 texture and use texture coordinates to map a different part 
-    of the texture to each face of the cube. This is the technique 
-    that pretty much all high performance apps (read games) use.""
-        https://webglfundamentals.org/webgl/lessons/webgl-3d-textures.html
-  */ 
   var vertexData = suzanne.meshes[0].vertices
   var params = [
     createParams(
@@ -1705,13 +1698,6 @@ function executeDrawSuzanne () {
 }
 
 function executeDrawTRex () {
-  /*
-    "The, dare I say, best solution is to put all of the images in 
-    1 texture and use texture coordinates to map a different part 
-    of the texture to each face of the cube. This is the technique 
-    that pretty much all high performance apps (read games) use.""
-        https://webglfundamentals.org/webgl/lessons/webgl-3d-textures.html
-  */ 
   var vertexData = TRex.verts
   var params = [
     createParams(
