@@ -1698,7 +1698,7 @@ function executeDrawSuzanne () {
 }
 
 function executeDrawTRex () {
-  // http://www.greentoken.de/onlineconv/ to convert .blend to json
+  // http://www.greentoken.de/onlineconv/ to convert OBJ to json
   var vertexData = TRex.meshes[0].vertices
   var params = [
     createParams(
