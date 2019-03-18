@@ -1698,7 +1698,7 @@ function executeDrawSuzanne () {
 }
 
 function executeDrawTRex () {
-  var vertexData = TRex.verts
+  var vertexData = TRex.meshes[0].vertices
   var params = [
     createParams(
       'aVertexPosition',
@@ -1712,7 +1712,7 @@ function executeDrawTRex () {
   ]
   var vertexBuffer = buildBuffer(params, vertexData)
 
-  var textCoord = TRex.texcoords
+  var textCoord = TRex.meshes[0].texturecoords[0]
   params = [createParams(
     'aVertexTexCoord',
     2,
@@ -1724,7 +1724,7 @@ function executeDrawTRex () {
   )]
   var textCoordBuffer = buildBuffer(params, textCoord)
 
-  var boxIndices = TRex.indices
+  var boxIndices = [].concat.apply([], TRex.meshes[0].faces)
 
   params = [createParams('indices', 6, gl.ELEMENT_ARRAY_BUFFER)]
   var indicesBuffer = buildBuffer(params, boxIndices)
