@@ -1703,3 +1703,62 @@ function executeDrawSuzanne () {
     uniforms
   )
 }
+
+function executeDrawTRex () {
+  /*
+    "The, dare I say, best solution is to put all of the images in 
+    1 texture and use texture coordinates to map a different part 
+    of the texture to each face of the cube. This is the technique 
+    that pretty much all high performance apps (read games) use.""
+        https://webglfundamentals.org/webgl/lessons/webgl-3d-textures.html
+  */ 
+  var vertexData = TRex.verts
+  var params = [
+    createParams(
+      'aVertexPosition',
+      3,
+      gl.ARRAY_BUFFER,
+      gl.FLOAT,
+      gl.FALSE,
+      3 * Float32Array.BYTES_PER_ELEMENT,
+      0
+    )
+  ]
+  var vertexBuffer = buildBuffer(params, vertexData)
+
+  var textCoord = TRex.texcoords
+  params = [createParams(
+    'aVertexTexCoord',
+    2,
+    gl.ARRAY_BUFFER,
+    gl.FLOAT,
+    gl.FALSE,
+    2 * Float32Array.BYTES_PER_ELEMENT,
+    0 * Float32Array.BYTES_PER_ELEMENT
+  )]
+  var textCoordBuffer = buildBuffer(params, textCoord)
+
+  var boxIndices = TRex.indices
+
+  params = [createParams('indices', 6, gl.ELEMENT_ARRAY_BUFFER)]
+  var indicesBuffer = buildBuffer(params, boxIndices)
+
+  // Can add more attributes
+  var buffers = [vertexBuffer, textCoordBuffer, indicesBuffer]
+
+  // TODO: Change Me
+  var uniforms = [
+    { name: 'uModelViewMatrix', matrix: buildModelView() },
+    { name: 'uProjectionMatrix', matrix: buildProjection() }
+  ]
+
+  bindTexture(resources.images.Trex_Diffuse)
+
+  drawCube(
+    resources.vertexShaders.imageVertShader,
+    resources.fragShaders.imageFragShader,
+    boxIndices.length,
+    buffers,
+    uniforms
+  )
+}

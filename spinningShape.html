@@ -19,6 +19,7 @@
 
     <!-- TODO: load me instead -->
     <script src="suzanne.js"></script>
+    <script src="t-rex.js"></script>
 
     <!-- Main Class for graphics loop -->
     <script src="main.js"></script>
@@ -52,6 +53,8 @@
             $("#suzanneButton").css("color", "black");
             $("#rubiksButton").css("background-color", "white");
             $("#rubiksButton").css("color", "black");
+            $("#TRexButton").css("background-color", "white");
+            $("#TRexButton").css("color", "black");
             $("#rubiksButton").click(function () {
                 buttonClick("rubiksButton")
             })
@@ -72,6 +75,9 @@
             })
             $("#suzanneButton").click(function () {
                 buttonClick("suzanneButton")
+            })
+            $("#TRexButton").click(function () {
+                buttonClick("TRexButton")
             })
         })
     </script>
@@ -122,6 +128,7 @@
         <button type="button" class="btn btn-info btn-lg" id="pyramidButton">Pyramid</button>
         <button type="button" class="btn btn-info btn-lg" id="rubiksButton">Rubiks Cube</button>
         <button type="button" class="btn btn-info btn-lg" id="suzanneButton">Suzanne</button>
+        <button type="button" class="btn btn-info btn-lg" id="TRexButton">TRex</button>
     </div>
 
 

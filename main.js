@@ -8,7 +8,7 @@ var resources = {
   vertexShaders: { length: 0 },
   images: { length: 0}
 }
-var imagePaths = ['boxSide.jpg','fullRubix.jpg', 'SusanTexture.png']
+var imagePaths = ['boxSide.jpg','fullRubix.jpg', 'SusanTexture.png', 'Trex_Diffuse.jpg']
 
 function createParams (
   name,
@@ -215,10 +215,13 @@ function drawObjects () {
   if (buttons.suzanneButton == 1) {
     executeDrawSuzanne()
   }
+  if (buttons.TRexButton == 1) {
+    executeDrawTRex()
+  }
 }
 
 function main () {
-  var backgroundColor = [0.0, 0.0, 0.0, 1.0]
+  var backgroundColor = [1.0, 1.0, 1.0, 1.0]
 
   initializeWebGL()
   // for consistent call rate on keypress, call only millisecond
