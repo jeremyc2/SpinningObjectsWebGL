@@ -1741,7 +1741,7 @@ function executeDrawTRex () {
     { name: 'uProjectionMatrix', matrix: buildProjection() }
   ]
 
-  bindTexture(resources.images.Trex_Diffuse)
+  bindTexture(resources.images.RexTexture)
 
   drawCube(
     resources.vertexShaders.imageVertShader,

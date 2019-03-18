@@ -8,7 +8,7 @@ var resources = {
   vertexShaders: { length: 0 },
   images: { length: 0}
 }
-var imagePaths = ['boxSide.jpg','fullRubix.jpg', 'SusanTexture.png', 'Trex_Diffuse.jpg']
+var imagePaths = ['boxSide.jpg','fullRubix.jpg', 'SusanTexture.png', 'RexTexture.jpeg']
 
 function createParams (
   name,
