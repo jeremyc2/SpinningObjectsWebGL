@@ -88,7 +88,7 @@
 <body onload="main()">
 
     <div class="container">
-        <h2>The Great Spinning Cube!</h2>
+        <h2>3D Object Modeler</h2>
         <!-- Trigger the modal with a button -->
         <button type="button" class="btn btn-info btn-lg" data-toggle="modal"
             data-target="#instructions">Instructions</button>
@@ -104,7 +104,21 @@
                         <h4 class="modal-title">Instructions</h4>
                     </div>
                     <div class="modal-body">
-                        <p>Welcome to the Spinning Cube demonstration!</p>
+                        <h3>Welcome to the our 3D Modeler!</h3>
+                        <br>
+                        <div>
+                            <pre>Use WASD to translate the object 
+                                &#10;Additional Keyboard Controls:
+                                &#10;&#9;<span class="glyphicon glyphicon-plus"></span> -- Zoom in
+                                &#10;&#9;<span class="glyphicon glyphicon-minus"></span> -- Zoom out
+                                &#10;&#9;<strong>;</strong> and <strong>p</strong> -- Rotate Z
+                                &#10;&#9;<strong>k</strong> and <strong>i</strong> -- Rotate X
+                                &#10;&#9;<strong>l</strong> and <strong>o</strong> -- Rotate Y
+
+                                &#10;Click the bottons below to experiment with different models. 
+                                &#10;Give it a shot!
+                            </pre>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -121,14 +135,14 @@
 
     </canvas>
     <div class="center">
-        <button type="button" class="btn btn-info btn-lg" id="cubeButton">Cube</button>
-        <button type="button" class="btn btn-info btn-lg" id="squareButton">Square</button>
-        <button type="button" class="btn btn-info btn-lg" id="plusButton">Plus</button>
-        <button type="button" class="btn btn-info btn-lg" id="imageCubeButton">Granite Cube</button>
-        <button type="button" class="btn btn-info btn-lg" id="pyramidButton">Pyramid</button>
-        <button type="button" class="btn btn-info btn-lg" id="rubiksButton">Rubiks Cube</button>
-        <button type="button" class="btn btn-info btn-lg" id="suzanneButton">Suzanne</button>
-        <button type="button" class="btn btn-info btn-lg" id="TRexButton">TRex</button>
+        <button type="button" class="btn btn-info btn-lg" style="display: inline-block; margin-bottom: 10px" id="cubeButton">Cube</button>
+        <button type="button" class="btn btn-info btn-lg" style="display: inline-block; margin-bottom: 10px" id="squareButton">Square</button>
+        <button type="button" class="btn btn-info btn-lg" style="display: inline-block; margin-bottom: 10px" id="plusButton">Plus</button>
+        <button type="button" class="btn btn-info btn-lg" style="display: inline-block; margin-bottom: 10px" id="imageCubeButton">Granite Cube</button>
+        <button type="button" class="btn btn-info btn-lg" style="display: inline-block; margin-bottom: 10px" id="pyramidButton">Pyramid</button>
+        <button type="button" class="btn btn-info btn-lg" style="display: inline-block; margin-bottom: 10px" id="rubiksButton">Rubiks Cube</button>
+        <button type="button" class="btn btn-info btn-lg" style="display: inline-block; margin-bottom: 10px" id="suzanneButton">Suzanne</button>
+        <button type="button" class="btn btn-info btn-lg" style="display: inline-block; margin-bottom: 10px" id="TRexButton">TRex</button>
     </div>
 
 

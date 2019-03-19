@@ -221,6 +221,10 @@ function drawObjects () {
 }
 
 function main () {
+
+  //Start with the cube
+  buttonClick("cubeButton")
+  
   var backgroundColor = [1.0, 1.0, 1.0, 1.0]
 
   initializeWebGL()
