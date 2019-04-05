@@ -1,0 +1,90 @@
+127.0.0.1 - - [05/Apr/2019 09:31:04] "GET /spinningShape.html HTTP/1.1" 200 -
+127.0.0.1 - - [05/Apr/2019 09:31:05] "GET /shaders/defaultVertexShader.glsl?please-dont-cache=0.10020454843518545 HTTP/1.1" 200 -
+127.0.0.1 - - [05/Apr/2019 09:31:05] "GET /shaders/imageVertShader.glsl?please-dont-cache=0.9949010238645535 HTTP/1.1" 200 -
+127.0.0.1 - - [05/Apr/2019 09:31:05] "GET /shaders/defaultShader.glsl?please-dont-cache=0.5201313952892639 HTTP/1.1" 200 -
+127.0.0.1 - - [05/Apr/2019 09:31:05] "GET /shaders/imageFragShader.glsl?please-dont-cache=0.6921825160468689 HTTP/1.1" 200 -
+127.0.0.1 - - [05/Apr/2019 09:31:05] "GET /cube-logo.png HTTP/1.1" 200 -
+127.0.0.1 - - [05/Apr/2019 09:31:10] "GET /spinningShape.html HTTP/1.1" 200 -
+127.0.0.1 - - [05/Apr/2019 09:31:10] "GET /shaders/defaultVertexShader.glsl?please-dont-cache=0.2682210129204665 HTTP/1.1" 200 -
+127.0.0.1 - - [05/Apr/2019 09:31:10] "GET /shaders/imageVertShader.glsl?please-dont-cache=0.9938950470769805 HTTP/1.1" 200 -
+127.0.0.1 - - [05/Apr/2019 09:31:10] "GET /shaders/defaultShader.glsl?please-dont-cache=0.1979869047261107 HTTP/1.1" 200 -
+127.0.0.1 - - [05/Apr/2019 09:31:10] "GET /shaders/imageFragShader.glsl?please-dont-cache=0.4255463630840939 HTTP/1.1" 200 -
+127.0.0.1 - - [05/Apr/2019 09:31:10] "GET /cube-logo.png HTTP/1.1" 200 -
+127.0.0.1 - - [05/Apr/2019 09:31:13] "GET /spinningShape.html HTTP/1.1" 200 -
+127.0.0.1 - - [05/Apr/2019 09:31:13] "GET /shaders/defaultVertexShader.glsl?please-dont-cache=0.32714336884004225 HTTP/1.1" 200 -
+127.0.0.1 - - [05/Apr/2019 09:31:13] "GET /shaders/imageVertShader.glsl?please-dont-cache=0.6261838580158823 HTTP/1.1" 200 -
+127.0.0.1 - - [05/Apr/2019 09:31:13] "GET /shaders/defaultShader.glsl?please-dont-cache=0.5262983391462093 HTTP/1.1" 200 -
+127.0.0.1 - - [05/Apr/2019 09:31:13] "GET /shaders/imageFragShader.glsl?please-dont-cache=0.4975735366279026 HTTP/1.1" 200 -
+127.0.0.1 - - [05/Apr/2019 09:31:13] "GET /cube-logo.png HTTP/1.1" 200 -
+Traceback (most recent call last):
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/runpy.py", line 162, in _run_module_as_main
+    "__main__", fname, loader, pkg_name)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/runpy.py", line 72, in _run_code
+    exec code in run_globals
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/SimpleHTTPServer.py", line 235, in <module>
+    test()
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/SimpleHTTPServer.py", line 231, in test
+    BaseHTTPServer.test(HandlerClass, ServerClass)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/BaseHTTPServer.py", line 599, in test
+    httpd.serve_forever()
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/SocketServer.py", line 236, in serve_forever
+    poll_interval)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/SocketServer.py", line 155, in _eintr_retry
+    return func(*args)
+KeyboardInterrupt
+127.0.0.1 - - [05/Apr/2019 09:31:37] "GET /spinningShape.html HTTP/1.1" 200 -
+127.0.0.1 - - [05/Apr/2019 09:31:37] "GET /shaders/defaultVertexShader.glsl?please-dont-cache=0.6567708969428423 HTTP/1.1" 200 -
+127.0.0.1 - - [05/Apr/2019 09:31:37] "GET /shaders/imageVertShader.glsl?please-dont-cache=0.7098617943047978 HTTP/1.1" 200 -
+127.0.0.1 - - [05/Apr/2019 09:31:37] "GET /shaders/defaultShader.glsl?please-dont-cache=0.1465761922839377 HTTP/1.1" 200 -
+127.0.0.1 - - [05/Apr/2019 09:31:37] "GET /shaders/imageFragShader.glsl?please-dont-cache=0.8475352864622772 HTTP/1.1" 200 -
+127.0.0.1 - - [05/Apr/2019 09:31:37] "GET /cube-logo.png HTTP/1.1" 200 -
+127.0.0.1 - - [05/Apr/2019 09:31:59] "GET /spinningShape.html HTTP/1.1" 200 -
+127.0.0.1 - - [05/Apr/2019 09:31:59] "GET /shaders/defaultVertexShader.glsl?please-dont-cache=0.7852438113320879 HTTP/1.1" 200 -
+127.0.0.1 - - [05/Apr/2019 09:31:59] "GET /shaders/imageVertShader.glsl?please-dont-cache=0.384636206314519 HTTP/1.1" 200 -
+127.0.0.1 - - [05/Apr/2019 09:31:59] "GET /shaders/defaultShader.glsl?please-dont-cache=0.23841876838457088 HTTP/1.1" 200 -
+127.0.0.1 - - [05/Apr/2019 09:31:59] "GET /shaders/imageFragShader.glsl?please-dont-cache=0.20671217683001664 HTTP/1.1" 200 -
+127.0.0.1 - - [05/Apr/2019 09:31:59] "GET /cube-logo.png HTTP/1.1" 200 -
+Traceback (most recent call last):
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/runpy.py", line 162, in _run_module_as_main
+    "__main__", fname, loader, pkg_name)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/runpy.py", line 72, in _run_code
+    exec code in run_globals
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/SimpleHTTPServer.py", line 235, in <module>
+    test()
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/SimpleHTTPServer.py", line 231, in test
+    BaseHTTPServer.test(HandlerClass, ServerClass)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/BaseHTTPServer.py", line 599, in test
+    httpd.serve_forever()
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/SocketServer.py", line 236, in serve_forever
+    poll_interval)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/SocketServer.py", line 155, in _eintr_retry
+    return func(*args)
+KeyboardInterrupt
+127.0.0.1 - - [05/Apr/2019 09:32:18] "GET /spinningShape.html HTTP/1.1" 200 -
+127.0.0.1 - - [05/Apr/2019 09:32:18] "GET /shaders/defaultVertexShader.glsl?please-dont-cache=0.057160303363206655 HTTP/1.1" 200 -
+127.0.0.1 - - [05/Apr/2019 09:32:18] "GET /shaders/imageVertShader.glsl?please-dont-cache=0.7727770545251138 HTTP/1.1" 200 -
+127.0.0.1 - - [05/Apr/2019 09:32:18] "GET /shaders/defaultShader.glsl?please-dont-cache=0.9888814940669213 HTTP/1.1" 200 -
+127.0.0.1 - - [05/Apr/2019 09:32:18] "GET /shaders/imageFragShader.glsl?please-dont-cache=0.8751544770673407 HTTP/1.1" 200 -
+127.0.0.1 - - [05/Apr/2019 09:32:18] "GET /cube-logo.png HTTP/1.1" 200 -
+127.0.0.1 - - [05/Apr/2019 09:32:20] "GET /spinningShape.html HTTP/1.1" 200 -
+127.0.0.1 - - [05/Apr/2019 09:32:20] "GET /shaders/defaultVertexShader.glsl?please-dont-cache=0.3797981798824881 HTTP/1.1" 200 -
+127.0.0.1 - - [05/Apr/2019 09:32:20] "GET /shaders/imageVertShader.glsl?please-dont-cache=0.32987216119078444 HTTP/1.1" 200 -
+127.0.0.1 - - [05/Apr/2019 09:32:20] "GET /shaders/defaultShader.glsl?please-dont-cache=0.48333934645926524 HTTP/1.1" 200 -
+127.0.0.1 - - [05/Apr/2019 09:32:20] "GET /shaders/imageFragShader.glsl?please-dont-cache=0.4638888058541206 HTTP/1.1" 200 -
+127.0.0.1 - - [05/Apr/2019 09:32:20] "GET /cube-logo.png HTTP/1.1" 200 -
+Traceback (most recent call last):
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/runpy.py", line 162, in _run_module_as_main
+    "__main__", fname, loader, pkg_name)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/runpy.py", line 72, in _run_code
+    exec code in run_globals
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/SimpleHTTPServer.py", line 235, in <module>
+    test()
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/SimpleHTTPServer.py", line 231, in test
+    BaseHTTPServer.test(HandlerClass, ServerClass)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/BaseHTTPServer.py", line 599, in test
+    httpd.serve_forever()
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/SocketServer.py", line 236, in serve_forever
+    poll_interval)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/SocketServer.py", line 155, in _eintr_retry
+    return func(*args)
+KeyboardInterrupt
