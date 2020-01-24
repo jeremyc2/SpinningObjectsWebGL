@@ -3,3 +3,12 @@
     width: 50%;
     padding: 10px;
   }
+
+.object-button {
+  background-color: white;
+  color: black;
+
+  display: inline-block; 
+  margin-bottom: 10px
+
+}
