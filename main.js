@@ -183,10 +183,10 @@ function clearCanvas (backgroundColor) {
 }
 
 function calculateFramesPerSecond (err, callback) {
+  var startFrames = frames
   if (err) {
     callback(err)
   } else {
-    var startFrames = frames
     setTimeout(function () {
       callback(err, frames - startFrames)
     }, 1000)

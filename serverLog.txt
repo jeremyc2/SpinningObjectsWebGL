@@ -88,3 +88,66 @@ Traceback (most recent call last):
   File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/SocketServer.py", line 155, in _eintr_retry
     return func(*args)
 KeyboardInterrupt
+127.0.0.1 - - [24/Jan/2020 13:42:56] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [24/Jan/2020 13:42:56] "GET /main.css HTTP/1.1" 200 -
+127.0.0.1 - - [24/Jan/2020 13:42:56] "GET /gl-matrix.js HTTP/1.1" 200 -
+127.0.0.1 - - [24/Jan/2020 13:42:56] "GET /suzanne.js HTTP/1.1" 200 -
+127.0.0.1 - - [24/Jan/2020 13:42:56] "GET /t-rex.js HTTP/1.1" 200 -
+127.0.0.1 - - [24/Jan/2020 13:42:56] "GET /main.js HTTP/1.1" 200 -
+127.0.0.1 - - [24/Jan/2020 13:42:56] "GET /loader.js HTTP/1.1" 200 -
+127.0.0.1 - - [24/Jan/2020 13:42:56] "GET /imageLoader.js HTTP/1.1" 200 -
+127.0.0.1 - - [24/Jan/2020 13:42:56] "GET /matrix.js HTTP/1.1" 200 -
+127.0.0.1 - - [24/Jan/2020 13:42:56] "GET /userInput.js HTTP/1.1" 200 -
+127.0.0.1 - - [24/Jan/2020 13:42:56] "GET /drawFunctions.js HTTP/1.1" 200 -
+127.0.0.1 - - [24/Jan/2020 13:42:57] "GET /shaders/defaultVertexShader.glsl?please-dont-cache=0.17178866547806093 HTTP/1.1" 200 -
+127.0.0.1 - - [24/Jan/2020 13:42:57] "GET /shaders/imageVertShader.glsl?please-dont-cache=0.5866195271666412 HTTP/1.1" 200 -
+127.0.0.1 - - [24/Jan/2020 13:42:57] "GET /shaders/defaultShader.glsl?please-dont-cache=0.7512868035172404 HTTP/1.1" 200 -
+127.0.0.1 - - [24/Jan/2020 13:42:57] "GET /shaders/imageFragShader.glsl?please-dont-cache=0.7747899965041705 HTTP/1.1" 200 -
+127.0.0.1 - - [24/Jan/2020 13:42:57] "GET /boxSide.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [24/Jan/2020 13:42:57] "GET /fullRubix.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [24/Jan/2020 13:42:57] "GET /SusanTexture.png HTTP/1.1" 200 -
+127.0.0.1 - - [24/Jan/2020 13:42:57] "GET /RexTexture.jpeg HTTP/1.1" 200 -
+127.0.0.1 - - [24/Jan/2020 13:42:57] "GET /cube-logo.png HTTP/1.1" 200 -
+127.0.0.1 - - [24/Jan/2020 13:47:19] code 404, message File not found
+127.0.0.1 - - [24/Jan/2020 13:47:19] "GET /runestone/ajax/getuser HTTP/1.1" 404 -
+127.0.0.1 - - [24/Jan/2020 13:47:19] code 404, message File not found
+127.0.0.1 - - [24/Jan/2020 13:47:19] "GET /runestone/ajax/getnumusers HTTP/1.1" 404 -
+127.0.0.1 - - [24/Jan/2020 13:47:19] code 404, message File not found
+127.0.0.1 - - [24/Jan/2020 13:47:19] "GET /runestone/ajax/getnumonline HTTP/1.1" 404 -
+127.0.0.1 - - [24/Jan/2020 13:52:47] "GET /main.css HTTP/1.1" 200 -
+127.0.0.1 - - [24/Jan/2020 13:52:48] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [24/Jan/2020 13:52:48] "GET /main.css HTTP/1.1" 200 -
+127.0.0.1 - - [24/Jan/2020 13:52:48] "GET /gl-matrix.js HTTP/1.1" 200 -
+127.0.0.1 - - [24/Jan/2020 13:52:48] "GET /suzanne.js HTTP/1.1" 200 -
+127.0.0.1 - - [24/Jan/2020 13:52:48] "GET /t-rex.js HTTP/1.1" 200 -
+127.0.0.1 - - [24/Jan/2020 13:52:49] "GET /main.js HTTP/1.1" 200 -
+127.0.0.1 - - [24/Jan/2020 13:52:49] "GET /loader.js HTTP/1.1" 200 -
+127.0.0.1 - - [24/Jan/2020 13:52:49] "GET /imageLoader.js HTTP/1.1" 200 -
+127.0.0.1 - - [24/Jan/2020 13:52:49] "GET /matrix.js HTTP/1.1" 200 -
+127.0.0.1 - - [24/Jan/2020 13:52:49] "GET /userInput.js HTTP/1.1" 200 -
+127.0.0.1 - - [24/Jan/2020 13:52:49] "GET /drawFunctions.js HTTP/1.1" 200 -
+127.0.0.1 - - [24/Jan/2020 13:52:49] "GET /shaders/defaultVertexShader.glsl?please-dont-cache=0.35430781917863396 HTTP/1.1" 200 -
+127.0.0.1 - - [24/Jan/2020 13:52:49] "GET /shaders/imageVertShader.glsl?please-dont-cache=0.6585959417000604 HTTP/1.1" 200 -
+127.0.0.1 - - [24/Jan/2020 13:52:49] "GET /shaders/defaultShader.glsl?please-dont-cache=0.8966750016667475 HTTP/1.1" 200 -
+127.0.0.1 - - [24/Jan/2020 13:52:49] "GET /shaders/imageFragShader.glsl?please-dont-cache=0.007567203127183175 HTTP/1.1" 200 -
+127.0.0.1 - - [24/Jan/2020 13:52:49] "GET /boxSide.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [24/Jan/2020 13:52:49] "GET /fullRubix.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [24/Jan/2020 13:52:49] "GET /SusanTexture.png HTTP/1.1" 200 -
+127.0.0.1 - - [24/Jan/2020 13:52:49] "GET /RexTexture.jpeg HTTP/1.1" 200 -
+127.0.0.1 - - [24/Jan/2020 13:52:49] "GET /cube-logo.png HTTP/1.1" 200 -
+Traceback (most recent call last):
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/runpy.py", line 174, in _run_module_as_main
+    "__main__", fname, loader, pkg_name)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/runpy.py", line 72, in _run_code
+    exec code in run_globals
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/SimpleHTTPServer.py", line 235, in <module>
+    test()
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/SimpleHTTPServer.py", line 231, in test
+    BaseHTTPServer.test(HandlerClass, ServerClass)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/BaseHTTPServer.py", line 610, in test
+    httpd.serve_forever()
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/SocketServer.py", line 231, in serve_forever
+    poll_interval)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/SocketServer.py", line 150, in _eintr_retry
+    return func(*args)
+KeyboardInterrupt
