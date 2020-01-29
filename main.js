@@ -10,7 +10,7 @@ var resources = {
 }
 var imagePaths = ['boxSide.jpg','fullRubix.jpg', 'SusanTexture.png', 'RexTexture.jpeg']
 
-var canvas = document.getElementsById("gl");
+var canvas = document.getElementById("gl");
 
 function createParams (
   name,
