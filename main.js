@@ -230,6 +230,12 @@ function main () {
   canvas.addEventListener("mouseout", mouseUp, false);
   canvas.addEventListener("mousemove", mouseMove, false);
 
+  canvas.addEventListener('touchstart', mouseDown);
+  canvas.addEventListener('touchmove', mouseMove);
+  canvas.addEventListener('touchend', mouseUp);
+  canvas.addEventListener('touchleave', mouseUp);
+  canvas.addEventListener('touchcancel', mouseUp);
+
   //Start with the cube
   buttonClick("cubeButton")
   
