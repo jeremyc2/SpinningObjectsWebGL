@@ -54,13 +54,13 @@ var mouseDown = function(e) {
    drag = true;
    old_x = e.pageX || e.touches[0].pageX, old_y = e.pageY || e.touches[0].pageY;
    e.preventDefault();
-   console.log("mouse down");
+  //  console.log("mouse down");
    return false;
 };
 
 var mouseUp = function(e){
    drag = false;
-   console.log("mouse up");
+  //  console.log("mouse up");
 };
 
 var mouseMove = function(e) {
@@ -72,7 +72,7 @@ var mouseMove = function(e) {
    rotate.x += dY;
    old_x = e.pageX || e.touches[0].pageX, old_y = e.pageY || e.touches[0].pageY;
    e.preventDefault();
-   console.log("dX=", dX, " dY=", dY, " e.pageX=", e.touches[0].pageX, " e.pageY=", e.touches[0].pageY);
+  //  console.log("dX=", dX, " dY=", dY, " e.pageX=", e.touches[0].pageX, " e.pageY=", e.touches[0].pageY);
 };
 
 function rotateControls (e) {
