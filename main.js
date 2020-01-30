@@ -10,7 +10,7 @@ var resources = {
 }
 var imagePaths = ['boxSide.jpg','fullRubix.jpg', 'SusanTexture.png', 'RexTexture.jpeg']
 
-var canvas = document.getElementById("gl");
+var canvas
 
 function createParams (
   name,
@@ -223,6 +223,12 @@ function drawObjects () {
 }
 
 function main () {
+
+  canvas = document.getElementById("gl");
+  canvas.addEventListener("mousedown", mouseDown, false);
+  canvas.addEventListener("mouseup", mouseUp, false);
+  canvas.addEventListener("mouseout", mouseUp, false);
+  canvas.addEventListener("mousemove", mouseMove, false);
 
   //Start with the cube
   buttonClick("cubeButton")

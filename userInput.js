@@ -71,11 +71,6 @@ var mouseMove = function(e) {
    e.preventDefault();
 };
 
-canvas.addEventListener("mousedown", mouseDown, false);
-canvas.addEventListener("mouseup", mouseUp, false);
-canvas.addEventListener("mouseout", mouseUp, false);
-canvas.addEventListener("mousemove", mouseMove, false);
-
 function rotateControls (e) {
   switch (e.keyCode) {
     case 186: // (;)
