@@ -222,6 +222,15 @@ function drawObjects () {
   }
 }
 
+function fitToContainer(canvas){
+  // Make it visually fill the positioned parent
+  canvas.style.width ='100%';
+  canvas.style.height='100%';
+  // ...then set the internal size to match
+  canvas.width  = canvas.offsetWidth;
+  canvas.height = canvas.offsetHeight;
+}
+
 function main () {
 
   canvas = document.getElementById("gl");
@@ -235,6 +244,8 @@ function main () {
   canvas.addEventListener('touchend', mouseUp);
   canvas.addEventListener('touchleave', mouseUp);
   canvas.addEventListener('touchcancel', mouseUp);
+
+  fitToContainer(canvas);
 
   //Start with the cube
   buttonClick("cubeButton")
