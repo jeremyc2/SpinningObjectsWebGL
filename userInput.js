@@ -54,19 +54,22 @@ var mouseDown = function(e) {
    drag = true;
    old_x = e.pageX, old_y = e.pageY;
    e.preventDefault();
+   console.log("mouse down");
    return false;
 };
 
 var mouseUp = function(e){
    drag = false;
+   console.log("mouse up");
 };
 
 var mouseMove = function(e) {
    if (!drag) return false;
+   console.log("mouse move");
    dX = (e.pageX-old_x)*2*Math.PI/canvas.width,
    dY = (e.pageY-old_y)*2*Math.PI/canvas.height;
    rotate.y += dX;
-   rotate.x +=dY;
+   rotate.x += dY;
    old_x = e.pageX, old_y = e.pageY;
    e.preventDefault();
 };
